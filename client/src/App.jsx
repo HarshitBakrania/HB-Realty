@@ -1,11 +1,11 @@
+import NavBar from "./components/NavBar"
 
 function App() {
-
   return (
-    <div>
-      <div className="flex justify-center text-2xl">
-        Hello World!
-      </div>
+    <div className="bg-background-color">  
+        <div className="p-8"> 
+            <NavBar />
+        </div>
     </div>
   )
 }
