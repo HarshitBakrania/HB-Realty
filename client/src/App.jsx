@@ -1,10 +1,12 @@
 import NavBar from "./components/NavBar"
+import { Homepage } from "./routes/Homepage"
 
 function App() {
   return (
     <div className="bg-background-color">  
-        <div className="p-8"> 
+        <div> 
             <NavBar />
+            <Homepage />
         </div>
     </div>
   )
