@@ -1,4 +1,5 @@
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 import express from "express";
 import prisma from "../lib/prisma.js";
 
@@ -32,7 +33,6 @@ router.post("/register", async(req,res) =>{
 
 router.post("/login", async(req,res) =>{
     const { username, password } = req.body;
-    console.log(req.body.password)
 
     try{
         const user = await prisma.user.findUnique({
@@ -55,8 +55,17 @@ router.post("/login", async(req,res) =>{
             })
         }
 
-        res.send({
-            message: "Login successful"
+        const sessionAge = 1000 * 60 * 60 * 24 * 7;
+
+        const token = jwt.sign({
+            id: user.id
+        }, process.env.JWT_SECRET,{expiresIn: sessionAge})
+
+        res.cookie("authToken", token,{
+            httpOnly: true,
+            maxAge: sessionAge
+        }).status(200).json({
+            message: "Logged in successfully"
         })
 
     }catch(error){
@@ -69,7 +78,10 @@ router.post("/login", async(req,res) =>{
 })
 
 router.post("/logout", (req,res) =>{
-    console.log("logout route")
+    res.clearCookie("authToken").status(200).json({
+        message: "Logged out successfully"
+    })
+   
 })
 
 export default router
