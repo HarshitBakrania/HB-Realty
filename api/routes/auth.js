@@ -1,22 +1,71 @@
 import bcrypt from "bcrypt";
 import express from "express";
+import prisma from "../lib/prisma.js";
 
 const router = express.Router();
 
 router.post("/register", async(req,res) =>{
     const { username, email, password } = req.body;
 
-    //TODO: HASH PASSWORD
-    const hashedPassword = await bcrypt.hash(password, 10);
-    console.log(hashedPassword);
+    try{
+        const hashedPassword = await bcrypt.hash(password, 10);
 
-    res.send({
-        message: "Register route"
-    })
+        const newUser = await prisma.user.create({
+            data: {
+                username,
+                email,
+                password: hashedPassword
+            }
+        })
+    
+        res.send({
+            message: "User created successfully"
+        })
+    }catch(error){
+        console.log(error);
+        res.status(500).json({
+            message: "Failed to create User"
+        })
+    }
+
 })
 
-router.post("/login", (req,res) =>{
-    console.log("login route")
+router.post("/login", async(req,res) =>{
+    const { username, password } = req.body;
+    console.log(req.body.password)
+
+    try{
+        const user = await prisma.user.findUnique({
+            where: {
+                username
+            }
+        })
+
+        if(!user){
+            return res.status(401).json({
+                message: "Invalid credentials"
+            })
+        }
+
+        const isPasswordCorrect = await bcrypt.compare(password, user.password);
+
+        if(!isPasswordCorrect){
+            return res.status(401).json({
+                message: "Invalid credentials"
+            })
+        }
+
+        res.send({
+            message: "Login successful"
+        })
+
+    }catch(error){
+        console.log(error);
+        res.status(500).json({
+            message: "Failed to login"
+        })
+    }
+
 })
 
 router.post("/logout", (req,res) =>{
