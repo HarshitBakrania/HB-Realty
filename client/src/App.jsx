@@ -13,7 +13,7 @@ function App() {
           <Route path= "/" element={<Homepage />} />
           <Route path="list" element={<ListPage />} />
           <Route path="/:id" element={<PropertyPage />} />
-          <Route path="/register" element={<SignUpPage />} />
+          <Route path="/signup" element={<SignUpPage />} />
         </Routes>
       </BrowserRouter>
     </div>
