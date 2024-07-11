@@ -2,13 +2,13 @@ export default function NavBar(){
     return <div className="flex justify-between p-8 bg-background-color">
         <div className="sm:pl-20 "><HomeIcon /></div>
         <div className="sm:pr-10 ">
-            <div className="flex justify-end space-x-4">
-                <div className="cursor-pointer text-white no-underline hover:underline">Buy</div>
-                <div className="cursor-pointer text-white no-underline hover:underline">Rent</div>
-                <div className="cursor-pointer text-white no-underline hover:underline">About</div>
-                <div className="cursor-pointer text-white no-underline hover:underline">Contact</div>
-                <div className="cursor-pointer text-white no-underline hover:underline">Sign in</div>
-                <div className="cursor-pointer text-white no-underline hover:underline">Sign up</div>
+            <div className="flex justify-end space-x-4 text-white cursor-pointer flex-row">
+                <div className="no-underline hover:underline">Buy</div>
+                <div className="no-underline hover:underline">Rent</div>
+                <div className="no-underline hover:underline">About</div>
+                <div className="no-underline hover:underline">Contact</div>
+                <div className="no-underline hover:underline">Sign in</div>
+                <div className="no-underline hover:underline">Sign up</div>
             </div> 
         </div>
     </div>

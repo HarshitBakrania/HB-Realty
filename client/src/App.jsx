@@ -3,6 +3,7 @@ import { ListPage } from "./routes/ListPage";
 import { BrowserRouter, Routes, Route} from "react-router-dom";
 import { PropertyPage } from "./routes/PropertyPage";
 import { SignUpPage } from "./routes/SignUpPage";
+import { SignInPage } from "./routes/SignInPage";
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
           <Route path="list" element={<ListPage />} />
           <Route path="/:id" element={<PropertyPage />} />
           <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/signin" element={<SignInPage />} />
         </Routes>
       </BrowserRouter>
     </div>

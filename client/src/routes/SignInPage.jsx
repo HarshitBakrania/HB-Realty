@@ -5,26 +5,22 @@ import NavBar from "../components/NavBar"
 import { useState } from "react"
 import axios from "axios"
 
-export const SignUpPage = () => {
+export const SignInPage = () => {
     const[username, setUsername] = useState("");
-    const[email, setEmail] = useState("");
     const[password, setPassword] = useState("");
     const[error, setError] = useState("");
     const navigate = useNavigate();
 
-    async function RegisterUser(){
+    async function LoginUser(){
         try{
-            const response = await axios.post("http://localhost:3000/api/auth/register",{
+            const response = await axios.post("http://localhost:3000/api/auth/login",{
                 username,
-                email,
                 password
             })
             navigate("/")
-            console.log(response.data)  
         }catch(error){
             setError(error.response.data.message);
-            console.log(error.response.data.message);
-        } 
+        }
     }
 
     return (
@@ -32,29 +28,26 @@ export const SignUpPage = () => {
             <NavBar />
             <div className="text-center pt-24 space-y-2">
                 <div className="text-3xl font-bold">
-                    Register
+                    Welcome Back!
                 </div>
                 <div className="font-normal text-lg">
-                Create your account to get started
+                Sign in to your account to access the latest real estate listings.
                 </div>
             </div>
             <div className="bg-secondary-color border-1 max-w-md mx-auto mt-6 p-6 space-y-3 rounded-lg">
                 <InputBox onChange={e =>{
-                    setUsername(e.target.value);
-                }} type="text" label="Username" placeholder="John_Doe" />
-                <InputBox onChange={e =>{
-                    setEmail(e.target.value)
-                }} type="email" label="Email" placeholder="john@example.com" />
+                    setUsername(e.target.value)
+                }} label="Username" placeholder="Enter your username" type="text"/>
                 <InputBox onChange={e =>{
                     setPassword(e.target.value)
-                }} type="password" label="Password" placeholder="***********" />
-                <Button onClick={RegisterUser} label="Register" />
+                }} label="Password" placeholder="Enter your password" type="password"/>
+                <Button onClick={LoginUser} label="Sign In"/>
                 <div className="text-red-600 font-medium text-base">
                     {error}
                 </div>
                 <div>
-                    Already have an account?
-                    <Link to="/signin" className="underline pl-2 font-semibold">Login</Link>
+                    Don't have an account? 
+                    <Link to="/signup" className="underline pl-2 font-semibold">Register</Link>
                 </div>
             </div>
         </div>
