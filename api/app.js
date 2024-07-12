@@ -2,6 +2,7 @@ import express from "express"
 import cors from "cors"
 import authRoute from "./routes/auth.js"
 import cookieParser from "cookie-parser";
+import userRoute from "./routes/user.js"
 
 const PORT = 3000;
 
@@ -16,6 +17,7 @@ app.get("/", (req, res) => {
 })
 
 app.use("/api/auth", authRoute);
+app.use("/api/user", userRoute);
 
 
 

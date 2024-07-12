@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom"
 import Button from "../components/Button"
 import { InputBox } from "../components/InputBox"
 import NavBar from "../components/NavBar"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import axios from "axios"
 
 export const SignInPage = () => {
@@ -10,6 +10,12 @@ export const SignInPage = () => {
     const[password, setPassword] = useState("");
     const[error, setError] = useState("");
     const navigate = useNavigate();
+
+    useEffect(() => {
+        setTimeout(() =>{
+            setError("");
+        }, 3000)
+    },[error])
 
     async function LoginUser(){
         try{
