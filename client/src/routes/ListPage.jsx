@@ -21,19 +21,19 @@ export const ListPage = () => {
                     <div className="flex justify-between">
                         <div className="flex flex-col max-w-24">
                             <label>Min Price</label>
-                            <input type="number"></input>
+                            <input type="number" className="text-black"></input>
                         </div>
                         <div className="flex flex-col max-w-24">
                             <label>Max Price</label>
-                            <input type="number"></input>
+                            <input type="number" className="text-black"></input>
                         </div>
                     </div>
                     <BedroomFilter />
                     <Button label="Search" onClick={() => {}}/>
 
                 </div>
-                <div className="col-span-2">Properties</div>
-                <div className="col-span-2">Map</div>
+                <div className="col-span-2 bg-background-color">Properties</div>
+                <div className="col-span-2 bg-background-color">Map</div>
             </div>
         </div>
     );
@@ -43,7 +43,7 @@ function TypeFilter(){
     return(
         <div className="flex flex-col w-24 space-y-1">
             <label>Type</label>
-            <select name="type">
+            <select name="type" className="text-black">
                 <option value="">Any</option>
                 <option value="2">Buy</option>
                 <option value="3">Rent</option>
@@ -54,9 +54,9 @@ function TypeFilter(){
 
 function PropertyFilter(){
     return(
-        <div className="flex flex-col w-32 space-y-1">
+        <div className="flex flex-col w-32 space-y-1 ">
             <label>Property Type</label>
-            <select name="property">
+            <select name="property" className="text-black">
                 <option value="">Any</option>
                 <option value="apartment">Apartment</option>
                 <option value="house">House</option>
@@ -71,7 +71,7 @@ function BedroomFilter(){
     return(
         <div className="flex flex-col w-24 space-y-1">
             <label>Bedrooms</label>
-            <select name="bedroom">
+            <select name="bedroom" className="text-black">
                 <option value="">Any</option>
                 <option value="1">1</option>
                 <option value="2">2</option>

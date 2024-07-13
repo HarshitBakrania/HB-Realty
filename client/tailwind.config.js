@@ -8,7 +8,8 @@ export default {
     extend: {
       colors:{
         "background-color" : "#0F0F10",
-        "secondary-color": "#18181B"
+        "secondary-color": "#18181B",
+        "navbar-color": "#E6E6E6"
       }
     },
   },
