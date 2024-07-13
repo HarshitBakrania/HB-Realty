@@ -11,6 +11,7 @@ export const SignUpPage = () => {
     const[password, setPassword] = useState("");
     const[error, setError] = useState("");
     const navigate = useNavigate();
+    
 
     async function RegisterUser(){
         try{
