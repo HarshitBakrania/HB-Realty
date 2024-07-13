@@ -12,6 +12,7 @@ dist
 dist-ssr
 *.local
 README.md
+testData.js
 
 # Editor directories and files
 .vscode/*

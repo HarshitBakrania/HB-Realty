@@ -1,13 +1,16 @@
 import { InputBox } from "../components/InputBox";
 import NavBar from "../components/NavBar";
 import Button from "../components/Button";
+import { listData } from "../lib/testData";
+import PropertyCard from "../components/PropertyCard";
 
 export const ListPage = () => {
+    const data = listData;
     return (
         <div>
             <NavBar />
-            <div className="grid grid-cols-5">
-                <div className= "bg-secondary-color px-10 py-5 space-y-10 h-[100vh] col-span-1 border-r text-white">
+            <div className="grid grid-cols-5 bg-background-color">
+                <div className= " px-10 py-5 space-y-10 h-[100vh] col-span-1 border-zinc-900 border-r-2 text-white">
                     <div className="text-xl font-semibold">
                         Filters
                     </div>
@@ -32,8 +35,12 @@ export const ListPage = () => {
                     <Button label="Search" onClick={() => {}}/>
 
                 </div>
-                <div className="col-span-2 bg-background-color">Properties</div>
-                <div className="col-span-2 bg-background-color">Map</div>
+                <div className="col-span-2 text-white space-y-5 p-8">
+                    {data.map(item=>(
+                        <PropertyCard key={item.id} item={item}/>
+                    ))}
+                </div>
+                <div className="col-span-2 text-white">Map</div>
             </div>
         </div>
     );
