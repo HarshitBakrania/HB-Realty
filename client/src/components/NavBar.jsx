@@ -1,4 +1,8 @@
+import { useContext } from "react"
+import { AuthContext } from "../context/AuthContext"
+
 export default function NavBar(){
+
     return <div className="flex justify-between p-8 bg-navbar-color">
         <div className="sm:pl-20 "><HomeIcon /></div>
         <div className="sm:pr-10 ">
@@ -7,8 +11,7 @@ export default function NavBar(){
                 <NavBarButtons label="Rent" />
                 <NavBarButtons label="Contact" />
                 <NavBarButtons label="About" />
-                <NavBarButtons label="Sign in" />
-                <NavBarButtons label="Sign up" />
+                <IsLoggedIn />
             </div> 
         </div>
     </div>
@@ -26,4 +29,15 @@ const NavBarButtons = ({label}) => {
     return (
         <div className="no-underline hover:underline">{label}</div>
     )
+}
+
+function IsLoggedIn(){
+    const{currentUser} = useContext(AuthContext);
+    console.log(currentUser);
+    if(currentUser){
+        return <NavBarButtons label="Profile" />
+    }
+    else{
+        return <NavBarButtons label="Login" />
+    }
 }
