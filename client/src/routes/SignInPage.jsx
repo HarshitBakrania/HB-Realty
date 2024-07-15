@@ -2,13 +2,16 @@ import { Link, useNavigate } from "react-router-dom"
 import Button from "../components/Button"
 import { InputBox } from "../components/InputBox"
 import NavBar from "../components/NavBar"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
+import { AuthContext } from "../context/AuthContext"
 import axios from "axios"
 
 export const SignInPage = () => {
     const[username, setUsername] = useState("");
     const[password, setPassword] = useState("");
     const[error, setError] = useState("");
+    const {updateUser} = useContext(AuthContext);
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -23,6 +26,7 @@ export const SignInPage = () => {
                 username,
                 password
             })
+            updateUser(response.data)
             navigate("/")
         }catch(error){
             setError(error.response.data.message);

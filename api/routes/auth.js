@@ -61,13 +61,12 @@ router.post("/login", async(req,res) =>{
             id: user.id
         }, process.env.JWT_SECRET,{expiresIn: sessionAge})
 
+        const { password: userPassword, ...userInfo } = user;
+
         res.cookie("authToken", token,{
             httpOnly: true,
             maxAge: sessionAge
-        }).status(200).json({
-            message: "Logged in successfully"
-        })
-
+        }).status(200).json(userInfo);
     }catch(error){
         console.log(error);
         res.status(500).json({

@@ -1,5 +1,11 @@
+import { useContext } from "react"
 import NavBar from "../components/NavBar"
+import { AuthContext } from "../context/AuthContext";
+
 export const Homepage = () => {
+    const {currentUser} = useContext(AuthContext);
+    console.log(currentUser);
+
     return (
         <div className="bg-background-color">
             <NavBar />
