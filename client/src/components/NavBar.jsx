@@ -1,7 +1,24 @@
 import { useContext } from "react"
 import { AuthContext } from "../context/AuthContext"
+import { useNavigate } from "react-router-dom"
 
 export default function NavBar(){
+    const navigate = useNavigate();
+    const IsLoggedIn = () =>{
+        const{currentUser} = useContext(AuthContext);
+        console.log(currentUser);
+        if(currentUser){
+            return <NavBarButtons label="Profile" onClick={() =>{
+                navigate("/user");
+            }}/>
+        }
+        else{
+            return <NavBarButtons label="Login" onClick={() =>{
+                navigate("/signin");
+            }} />
+        }
+    }
+    
 
     return <div className="flex justify-between p-8 bg-navbar-color">
         <div className="sm:pl-20 "><HomeIcon /></div>
@@ -25,19 +42,8 @@ const HomeIcon = () => {
     </div>  
 }
 
-const NavBarButtons = ({label}) => {
+const NavBarButtons = ({label, onClick}) => {
     return (
-        <div className="no-underline hover:underline">{label}</div>
+        <div onClick={onClick} className="no-underline hover:underline">{label}</div>
     )
-}
-
-function IsLoggedIn(){
-    const{currentUser} = useContext(AuthContext);
-    console.log(currentUser);
-    if(currentUser){
-        return <NavBarButtons label="Profile" />
-    }
-    else{
-        return <NavBarButtons label="Login" />
-    }
 }
