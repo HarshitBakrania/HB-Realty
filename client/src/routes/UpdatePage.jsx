@@ -1,15 +1,36 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import Button from "../components/Button"
 import { InputBox } from "../components/InputBox"
 import NavBar from "../components/NavBar"
 import { AuthContext } from "../context/AuthContext"
-import { Navigate } from "react-router-dom"
+import { Navigate, useNavigate } from "react-router-dom"
+import axios from "axios"
 
 export const UpdatePage = () => {
-    const{updateUser, currentUser} = useContext(AuthContext);
+    const{ currentUser, updateUser } = useContext(AuthContext);
+    const[username, setUsername] = useState(currentUser.username);
+    const[email, setEmail] = useState(currentUser.email);
+    const[password, setPassword] = useState("");
+    const navigate = useNavigate();
 
     if(!currentUser){
         return <Navigate to="/signin" />
+    }
+
+    async function UpdateUser(){
+        try{
+            const response = await axios.put(`http://localhost:3000/api/users/${currentUser.id}`, {
+                username,
+                email,
+                password
+            },{
+                withCredentials: true
+            })
+            updateUser(response.data)
+            navigate("/")
+        }catch(error){
+            console.log(error.response.data)
+        }
     }
 
     return (
@@ -19,11 +40,18 @@ export const UpdatePage = () => {
                 Update Profile
             </div>
             <div className="bg-secondary-color border-1 max-w-md mx-auto mt-6 p-6 space-y-3 rounded-lg text-white">
-                <InputBox label="Username" placeholder="john" type="text" defaultValue={currentUser.username} />
-                <InputBox label="Email" placeholder="john@example.com" type="email"  defaultValue={currentUser.email} />
-                <InputBox label="Password" placeholder="*********" type="password" />
-                <Button label="Update" />
+                <InputBox onChange={e =>{
+                    setUsername(e.target.value)
+                }} label="Username" placeholder="john" type="text"  />
+                <InputBox onChange={e =>{
+                    setEmail(e.target.value)
+                }} label="Email" placeholder="john@example.com" type="email"  />
+                <InputBox onChange={e =>{
+                    setPassword(e.target.value)
+                }} label="Password" placeholder="*********" type="password" />
+                <Button onClick={UpdateUser} label="Update" />
             </div>
         </div>
     )
+    
 }

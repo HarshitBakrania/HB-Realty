@@ -12,7 +12,6 @@ export const SignUpPage = () => {
     const[error, setError] = useState("");
     const navigate = useNavigate();
     
-
     async function RegisterUser(){
         try{
             const response = await axios.post("http://localhost:3000/api/auth/register",{
@@ -21,7 +20,7 @@ export const SignUpPage = () => {
                 password
             })
             navigate("/")
-            console.log(response.data)  
+            console.log(response.data)
         }catch(error){
             setError(error.response.data.message);
             console.log(error.response.data.message);

@@ -5,7 +5,7 @@ export const authMiddleware = (req, res, next) =>{
 
     if(!authToken){
         return res.status(401).json({
-            message: "Unauthorized"
+            message: "User Unauthorized"
         })
     }
 

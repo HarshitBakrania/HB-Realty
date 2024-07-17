@@ -5,6 +5,7 @@ import NavBar from "../components/NavBar"
 import { useContext, useEffect, useState } from "react"
 import { AuthContext } from "../context/AuthContext"
 import axios from "axios"
+import { useCookies } from "react-cookie";
 
 export const SignInPage = () => {
     const[username, setUsername] = useState("");
@@ -25,6 +26,8 @@ export const SignInPage = () => {
             const response = await axios.post("http://localhost:3000/api/auth/login",{
                 username,
                 password
+            },{
+                withCredentials: true
             })
             updateUser(response.data)
             navigate("/")
