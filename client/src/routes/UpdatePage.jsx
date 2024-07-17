@@ -19,8 +19,8 @@ export const UpdatePage = () => {
                 Update Profile
             </div>
             <div className="bg-secondary-color border-1 max-w-md mx-auto mt-6 p-6 space-y-3 rounded-lg text-white">
-                <InputBox label="Username" placeholder="john" type="text" />
-                <InputBox label="Email" placeholder="john@example.com" type="email" />
+                <InputBox label="Username" placeholder="john" type="text" defaultValue={currentUser.username} />
+                <InputBox label="Email" placeholder="john@example.com" type="email"  defaultValue={currentUser.email} />
                 <InputBox label="Password" placeholder="*********" type="password" />
                 <Button label="Update" />
             </div>
