@@ -21,7 +21,7 @@ function App() {
           <Route path="/signin" element={<SignInPage />} />
           <Route path="/user" element={<UserPage />} />
           <Route path="/user/update" element={<UpdatePage />} />
-          <Route path="/messages" element={<MessagePage />} />
+          <Route path="/user/messages" element={<MessagePage />} />
         </Routes>
       </BrowserRouter>
     </div>

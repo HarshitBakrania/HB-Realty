@@ -13,7 +13,9 @@ export const MessagePage = () =>{
     return (
         <div>
             <NavBar />
-            Message page
+            <div className="bg-background-color text-white h-[100vh]">
+                Messaging page
+            </div>
         </div>
     )
 }

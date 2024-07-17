@@ -58,7 +58,9 @@ router.put("/:id", authMiddleware, async(req, res) =>{
                 ...(avatar ? { avatar } : {}),
             },
         });
-        res.status(200).json(updatedUser)
+
+        const {password: userPassword, ...accountInfo} = updatedUser
+        res.status(200).json(accountInfo)
     }catch(error){
         console.log(error)
         res.status(500).json({message: "failed to update user!"})
