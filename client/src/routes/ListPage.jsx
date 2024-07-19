@@ -3,6 +3,7 @@ import NavBar from "../components/NavBar";
 import Button from "../components/Button";
 import { listData } from "../lib/testData";
 import PropertyCard from "../components/PropertyCard";
+import { SelectFilter } from "../components/SelectFilter";
 
 export const ListPage = () => {
     const data = listData;
@@ -18,8 +19,8 @@ export const ListPage = () => {
                         <InputBox label="Location" placeholder="City Location" type="text"/>
                     </div>
                     <div className="flex justify-between">
-                        <TypeFilter />
-                        <PropertyFilter />
+                        <SelectFilter label="Type" name="type" options={["Any","Buy", "Rent"]} />
+                        <SelectFilter label="Property" name="property" options={["Any", "Apartment", "House", "Land"]} />
                     </div>
                     <div className="flex justify-between">
                         <div className="flex flex-col max-w-24">
@@ -31,7 +32,7 @@ export const ListPage = () => {
                             <input type="number" className="text-black"></input>
                         </div>
                     </div>
-                    <BedroomFilter />
+                    <SelectFilter label="Bedrooms" name="bedroom" options={["Any", "1", "2", "3+"]} />
                     <Button label="Search" onClick={() => {}}/>
 
                 </div>
