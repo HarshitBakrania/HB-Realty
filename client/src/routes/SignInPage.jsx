@@ -55,7 +55,9 @@ export const SignInPage = () => {
                     <InputBox onChange={e =>{
                         setPassword(e.target.value)
                     }} label="Password" placeholder="Enter your password" type="password"/>
-                    <Button onClick={LoginUser} label="Sign In"/>
+                    <div className="w-full">
+                        <Button onClick={LoginUser} label="Sign In"/>
+                    </div>
                     <div className="text-red-600 font-medium text-base">
                         {error}
                     </div>

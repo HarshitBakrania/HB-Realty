@@ -2,6 +2,8 @@ import Button from "../components/Button";
 import { InputBox } from "../components/InputBox";
 import NavBar from "../components/NavBar";
 import { SelectFilter } from "../components/SelectFilter";
+import ReactQuill from "react-quill";
+import 'react-quill/dist/quill.snow.css';
 
 export const NewPostPage = () => {
 
@@ -11,10 +13,9 @@ export const NewPostPage = () => {
         const inputs = Object.fromEntries(formData);
         console.log(inputs)
     }
-        
-    
+ 
     return (
-       <div className="bg-background-color h-[100vh]">
+       <div className="bg-background-color">
            <NavBar />
            <div className="grid grid-cols-3">
             <div className="col-span-2">
@@ -30,29 +31,35 @@ export const NewPostPage = () => {
                     <InputBox label="Bathrooms" type="number" name="bathroom"/>
                     <InputBox label="Bathrooms" type="number" name="bathroom"/>
                     <InputBox label="Total Size" type="number" name="size" />
-                    <div className="flex justify-between p-4">
+                    <div className="flex justify-between py-4">
                         <SelectFilter label="Type" name="type" options={["Buy", "Rent"]} />
                         <SelectFilter label="Property" name="property" options={["Apartment", "House", "Land"]} />
                     </div>
                     <InputBox label="Latitude" type="text" name="latitude" />
                     <InputBox label="Longitude" type="text" name="longitude" />
-                    <div className="p-4 flex justify-between">
+                    <div className="py-4 flex justify-between">
                         <SelectFilter label="Furnished" name="furnished" options={["Yes", "No"]} />
                         <SelectFilter label="Pets" name="pet" options={["Allowed", "Not Allowed"]} />
                     </div>
                     <InputBox label="Schools Nearby" type="number" name="school" />
                     <InputBox label="Hospitals Nearby" type="number" name="hospital" />
-                    <InputBox label="Restaurants Nearby" type="number" name="restaurant" />
-                    
-                    
-                   
+                    <InputBox label="Restaurants Nearby" type="number" name="restaurant" /> 
                 </form>
+                <div className="px-32 py-14 text-white space-y-2">
+                    <div className="text-2xl">
+                        Write a description
+                    </div>
+                    <ReactQuill theme="snow" name="description" />
+                </div>
+                <div className="max-w-40 mx-auto pb-20">
+                    <Button label="Submit" />
+                </div>
+               
             </div>
             <div className="col-span-1 "> 
                 TEST
             </div>
-           </div>
-           
+           </div>   
        </div>
     );
 }
