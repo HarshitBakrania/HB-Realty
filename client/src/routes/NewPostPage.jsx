@@ -64,16 +64,16 @@ export const NewPostPage = () => {
                     </div>
                 </form>               
             </div>
-            <div className="col-span-1 space-y-8 flex flex-col py-14 "> 
+            <div className="col-span-1 flex flex-col py-14"> 
                 {images.map((image, index) => (
-                    <div key={index} className="relative hover:cursor-pointer flex space-x-3 px-24">
-                        <img src={image} className="w-80 h-45 rounded-lg" alt={`Uploaded ${index}`} />
+                    <div key={index} className="relative hover:cursor-pointer flex space-x-3 px-24 py-4">
+                        <img src={image} className="w-80 h-45 rounded-lg " alt={`Uploaded ${index}`} />
                         <div onClick={() => handleDeleteImage(image)}>
                             <XMark />
                         </div>
                     </div>    
                 ))}
-                <div className="flex justify-center"> 
+                <div className="flex justify-center pt-36"> 
                     <UploadWidget
                         uwConfig={{
                         cloudName: "dwos6fgt6",
