@@ -4,6 +4,7 @@ import Button from "../components/Button";
 import { listData } from "../lib/testData";
 import PropertyCard from "../components/PropertyCard";
 import { SelectFilter } from "../components/SelectFilter";
+import { Map } from "../components/Map";
 
 export const ListPage = () => {
     const data = listData;
@@ -41,51 +42,11 @@ export const ListPage = () => {
                         <PropertyCard key={item.id} item={item}/>
                     ))}
                 </div>
-                <div className="col-span-2 text-white">Map</div>
+                <div className="col-span-2 text-white">
+                    <Map items={data}/>
+                </div>
             </div>
         </div>
     );
 }
 
-function TypeFilter(){
-    return(
-        <div className="flex flex-col w-24 space-y-1">
-            <label>Type</label>
-            <select name="type" className="text-black">
-                <option value="">Any</option>
-                <option value="2">Buy</option>
-                <option value="3">Rent</option>
-            </select>
-        </div>
-    )
-}
-
-function PropertyFilter(){
-    return(
-        <div className="flex flex-col w-32 space-y-1 ">
-            <label>Property Type</label>
-            <select name="property" className="text-black">
-                <option value="">Any</option>
-                <option value="apartment">Apartment</option>
-                <option value="house">House</option>
-                <option value="condo">Condo</option>
-                <option value="land">Land</option>
-            </select>
-        </div>
-    )
-}
-
-function BedroomFilter(){
-    return(
-        <div className="flex flex-col w-24 space-y-1">
-            <label>Bedrooms</label>
-            <select name="bedroom" className="text-black">
-                <option value="">Any</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3+">3+</option>
-            </select>
-        </div>
-
-    )
-}
