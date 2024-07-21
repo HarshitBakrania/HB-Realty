@@ -6,15 +6,51 @@ import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 import UploadWidget from "../components/UploadImage";
 import { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export const NewPostPage = () => {
     const[images, setImages] = useState([]);
+    const[value, setValue] = useState("");
+    const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    async function handleSubmit(e){
         e.preventDefault();
         const formData = new FormData(e.target);
         const inputs = Object.fromEntries(formData);
         console.log(inputs)
+
+        try{
+            const response = await axios.post("http://localhost:3000/api/posts",{
+                postData: {
+                    title: inputs.title,
+                    price: parseInt(inputs.price),
+                    address: inputs.address,
+                    city: inputs.city,
+                    bedroom: parseInt(inputs.bedroom),
+                    bathroom: parseInt(inputs.bathroom),
+                    type: inputs.type.toLowerCase(),
+                    property: inputs.property.toLowerCase(),
+                    latitude: inputs.latitude,
+                    longitude: inputs.longitude,
+                    images: images,
+                },
+                postDetail:{
+                    description: value,
+                    utilities: inputs.furnished,
+                    pet: inputs.pet,
+                    size: parseInt(inputs.size),
+                    school: parseInt(inputs.school),
+                    hospital: parseInt(inputs.hospital),
+                    restaurant: parseInt(inputs.restaurant)
+                },
+            },{
+                withCredentials: true
+            });
+            navigate(`/posts/${response.data.id}`);
+        }catch(error){
+            console.log(error.response.data);
+        }
     }
 
     const handleDeleteImage = (url) => {
@@ -31,24 +67,23 @@ export const NewPostPage = () => {
                 </div>
                 <form onSubmit={handleSubmit} className="grid grid-cols-3 gap-y-7 gap-x-12 text-white px-44 pt-10">
                     <InputBox label="Title" type="text" name="title"/>  
-                    <InputBox label="Price" type="number" name="description"/>
+                    <InputBox label="Price" type="number" name="price"/>
                     <InputBox label="Address" type="text" name="address"/>
                     <InputBox label="City" type="text" name="city"/>
                     <InputBox label="Bedrooms" type="number" name="bedroom"/>
                     <InputBox label="Bathrooms" type="number" name="bathroom"/>
-                    <InputBox label="Bathrooms" type="number" name="bathroom"/>
                     <InputBox label="Total Size" type="number" name="size" />
+                    <InputBox label="Latitude" type="text" name="latitude" />
+                    <InputBox label="Longitude" type="text" name="longitude" />
+                    <InputBox label="Schools Nearby" type="number" name="school" />
                     <div className="flex justify-between py-4">
                         <SelectFilter label="Type" name="type" options={["Buy", "Rent"]} />
                         <SelectFilter label="Property" name="property" options={["Apartment", "House", "Land"]} />
                     </div>
-                    <InputBox label="Latitude" type="text" name="latitude" />
-                    <InputBox label="Longitude" type="text" name="longitude" />
                     <div className="py-4 flex justify-between">
                         <SelectFilter label="Furnished" name="furnished" options={["Yes", "No"]} />
                         <SelectFilter label="Pets" name="pet" options={["Allowed", "Not Allowed"]} />
                     </div>
-                    <InputBox label="Schools Nearby" type="number" name="school" />
                     <InputBox label="Hospitals Nearby" type="number" name="hospital" />
                     <InputBox label="Restaurants Nearby" type="number" name="restaurant" /> 
                     <div className="col-span-3">
@@ -56,7 +91,7 @@ export const NewPostPage = () => {
                             <div className="text-2xl">
                                 Write a description
                             </div>
-                            <ReactQuill theme="snow" name="description" />
+                            <ReactQuill theme="snow" name="description" onChange={setValue} value={value} />
                         </div>
                         <div className="max-w-40 mx-auto pb-20">
                             <Button label="Submit" />
@@ -83,8 +118,7 @@ export const NewPostPage = () => {
                         }}
                         setState={setImages}
                     />      
-                </div>
-                         
+                </div>    
             </div>
            </div>   
        </div>

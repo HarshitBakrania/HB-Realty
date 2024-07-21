@@ -17,13 +17,13 @@ function App() {
         <Routes>
           <Route path= "/" element={<Homepage />} />
           <Route path="list" element={<ListPage />} />
-          <Route path="/:id" element={<PropertyPage />} />
+          <Route path="/posts/:id" element={<PropertyPage />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/signin" element={<SignInPage />} />
           <Route path="/user" element={<UserPage />} />
           <Route path="/user/update" element={<UpdatePage />} />
           <Route path="/user/messages" element={<MessagePage />} />
-          <Route path="/create" element={<NewPostPage />} />
+          <Route path="/posts/create" element={<NewPostPage />} />
         </Routes>
       </BrowserRouter>
     </div>
