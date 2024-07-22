@@ -4,6 +4,7 @@ import { InputBox } from "../components/InputBox"
 import NavBar from "../components/NavBar"
 import { AuthContext } from "../context/AuthContext"
 import { Navigate, useNavigate } from "react-router-dom"
+import UploadWidget from "../components/UploadImage";
 import axios from "axios"
 
 export const UpdatePage = () => {
@@ -11,6 +12,7 @@ export const UpdatePage = () => {
     const[username, setUsername] = useState(currentUser.username);
     const[email, setEmail] = useState(currentUser.email);
     const[password, setPassword] = useState("");
+    const[avatar, setAvatar] = useState([]);
     const navigate = useNavigate();
 
     if(!currentUser){
@@ -22,7 +24,8 @@ export const UpdatePage = () => {
             const response = await axios.put(`http://localhost:3000/api/users/${currentUser.id}`, {
                 username,
                 email,
-                password
+                password,
+                avatar: avatar[0]
             },{
                 withCredentials: true
             })
@@ -49,7 +52,19 @@ export const UpdatePage = () => {
                 <InputBox onChange={e =>{
                     setPassword(e.target.value)
                 }} label="Password" placeholder="*********" type="password" />
-                <Button onClick={UpdateUser} label="Update" />
+                <div>
+                    <img src={avatar[0] }/>
+                    <UploadWidget
+                            uwConfig={{
+                            cloudName: "dwos6fgt6",
+                            uploadPreset: "estate",
+                            multiple: false,
+                            folder: "avatars",
+                            }}
+                            setState={setAvatar}
+                    />
+                </div>
+                <Button onClick={UpdateUser} label="Update" className="mt-6"/>
             </div>
         </div>
     )
