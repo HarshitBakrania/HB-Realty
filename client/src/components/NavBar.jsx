@@ -22,7 +22,7 @@ export default function NavBar(){
     }
     
     return <div className="flex justify-between p-8 bg-navbar-color">
-        <div className="sm:pl-20 "><HomeIcon /></div>
+        <div className="sm:pl-20" onClick={() => navigate("/")}><HomeIcon /></div>
         <div className="sm:pr-10 ">
             <div className="flex justify-end space-x-4 cursor-pointer flex-row">
                 <NavBarButtons label="Buy" />
