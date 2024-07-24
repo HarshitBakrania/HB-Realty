@@ -64,7 +64,7 @@ export const UpdatePage = () => {
                             setState={setAvatar}
                     />
                 </div>
-                <Button onClick={UpdateUser} label="Update" className="mt-6"/>
+                <Button onClick={UpdateUser} label="Update Profile" className="mt-6 w-full"/>
             </div>
         </div>
     )

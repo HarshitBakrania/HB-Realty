@@ -12,7 +12,7 @@ export const ListPage = () => {
         <div>
             <NavBar />
             <div className="grid grid-cols-5 bg-background-color">
-                <div className= " px-10 py-5 space-y-10 h-[100vh] col-span-1 border-zinc-900 border-r-2 text-white">
+                <div className= " px-10 py-5 space-y-10 h-[100vh] col-span-1 border-slate-600 border-r text-white">
                     <div className="text-xl font-semibold">
                         Filters
                     </div>
@@ -37,12 +37,12 @@ export const ListPage = () => {
                     <Button label="Search" onClick={() => {}}/>
 
                 </div>
-                <div className="col-span-2 text-white space-y-5 p-8">
+                <div className="col-span-2 text-white space-y-5 p-8 border-r border-slate-600">
                     {data.map(item=>(
                         <PropertyCard key={item.id} item={item}/>
                     ))}
                 </div>
-                <div className="col-span-2 text-white">
+                <div className="col-span-2 text-white p-20 px-20 rounded-sm h-screen">
                     <Map items={data}/>
                 </div>
             </div>
