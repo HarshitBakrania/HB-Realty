@@ -11,77 +11,6 @@ import { useNavigate } from "react-router-dom";
 export const Homepage = () => {
   const { currentUser } = useContext(AuthContext);
   // console.log(currentUser);
-  const navigate = useNavigate();
-  const[city, setCity] = useState("");
-  const[minPrice, setMinPrice] = useState("");
-  const[maxPrice, setMaxPrice] = useState("");
-  const[type, setType] = useState("");
-
-  const GetProperties = async() =>{
-    try{
-      const response = await axios.get("http://localhost:3000/api/posts",{
-        params:{
-          city,
-          minPrice,
-          maxPrice,
-          type
-        }
-      }
-       
-      )
-      navigate("/list")
-    }catch(error){
-      console.log(error)
-    }
-  }
-
-  function SearchFilters() {
-    return (
-      <div className="bg-secondary-color p-10 rounded-lg">
-        <div className="text-white text-3xl font-medium mb-4 italic">
-          Your perfect property awaits!
-        </div>
-        <div className="p-4 rounded-lg text-white">
-          <div className="grid grid-cols-4 gap-4">
-            <InputBox onChange={e =>{
-              setCity(e.target.value)
-            }}
-              label="City"
-              placeholder="Enter a City"
-              type="text"
-              className="w-full"
-            />
-            <InputBox onChange={e =>{
-              setMinPrice(e.target.value)
-            }}
-              label="Min. Price"
-              placeholder="0"
-              type="number"
-              className="w-full"
-            />
-            <InputBox onChange={e =>{
-              setMaxPrice(e.target.value)
-            }}
-              label="Max. Price"
-              placeholder="1,000,000"
-              type="number"
-              className="w-full"
-            />
-            <SelectFilter onChange={e =>{
-              setType(e.target.value)
-            }}
-              label="Buy or Rent"
-              name="type"
-              options={["Any", "Buy", "Rent"]}
-              className="w-full space-y-4 p-2.5 text-slate-500 rounded-lg"
-            />
-          </div>
-          <Button label="Search" onClick={GetProperties} className="mt-10 w-full" />
-        </div>
-      </div>
-    );
-  }
-  
 
   return (
     <div className="bg-background-color h-screen">
@@ -119,3 +48,72 @@ export const Homepage = () => {
   );
 };
 
+function SearchFilters() {
+  const[city, setCity] = useState("");
+  const[minPrice, setMinPrice] = useState("");
+  const[maxPrice, setMaxPrice] = useState("");
+  const[type, setType] = useState("");
+  const navigate = useNavigate();
+
+  const GetProperties = async() =>{
+    try{
+      const response = await axios.get("http://localhost:3000/api/posts",{
+        params:{
+          city,
+          minPrice,
+          maxPrice,
+          type
+        }
+      })
+      navigate("/list")
+    }catch(error){
+      console.log(error)
+    }
+  }
+
+
+  return (
+    <div className="bg-secondary-color p-10 rounded-lg">
+      <div className="text-white text-3xl font-medium mb-4 italic">
+        Your perfect property awaits!
+      </div>
+      <div className="p-4 rounded-lg text-white">
+        <div className="grid grid-cols-4 gap-4">
+          <InputBox onChange={e =>{
+            setCity(e.target.value)
+          }}
+            label="City"
+            placeholder="Enter a City"
+            type="text"
+            className="w-full"
+          />
+          <InputBox onChange={e =>{
+            setMinPrice(e.target.value)
+          }}
+            label="Min. Price"
+            placeholder="0"
+            type="number"
+            className="w-full"
+          />
+          <InputBox onChange={e =>{
+            setMaxPrice(e.target.value)
+          }}
+            label="Max. Price"
+            placeholder="1,000,000"
+            type="number"
+            className="w-full"
+          />
+          <SelectFilter onChange={e =>{
+            setType(e.target.value)
+          }}
+            label="Buy or Rent"
+            name="type"
+            options={["Any", "Buy", "Rent"]}
+            className="w-full space-y-4 p-2.5 text-slate-500 rounded-lg"
+          />
+        </div>
+        <Button label="Search" onClick={GetProperties} className="mt-10 w-full" />
+      </div>
+    </div>
+  );
+}
