@@ -61,7 +61,7 @@ function SearchFilters() {
       if(city) params.append("city", city);
       if(minPrice) params.append("minPrice", minPrice);
       if(maxPrice) params.append("maxPrice", maxPrice);
-      if (type && type !== 'Any') params.append('type', type);
+      if (type && type !== 'Any') params.append('type', type.toLowerCase());
       navigate(`/list?${params.toString()}`)
     }catch(error){
       console.log(error)
@@ -103,6 +103,7 @@ function SearchFilters() {
             setType(e.target.value)
             console.log(e.target.value)
           }}
+            value={type}
             label="Buy or Rent"
             name="type"
             options={["Any", "Buy", "Rent"]}
