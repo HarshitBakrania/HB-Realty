@@ -5,9 +5,16 @@ import { listData } from "../lib/testData";
 import PropertyCard from "../components/PropertyCard";
 import { SelectFilter } from "../components/SelectFilter";
 import { Map } from "../components/Map";
+import { usePosts } from "../hooks/usePosts";
 
 export const ListPage = () => {
-    const data = listData;
+    const { posts, loading } = usePosts();
+    
+    if(loading){
+        return <div>loading...</div>
+    }
+
+    const data = posts;
     return (
         <div>
             <NavBar />
