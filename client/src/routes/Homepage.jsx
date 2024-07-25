@@ -57,20 +57,16 @@ function SearchFilters() {
 
   const GetProperties = async() =>{
     try{
-      const response = await axios.get("http://localhost:3000/api/posts",{
-        params:{
-          city,
-          minPrice,
-          maxPrice,
-          type
-        }
-      })
-      navigate("/list")
+      const params = new URLSearchParams();
+      if(city) params.append("city", city);
+      if(minPrice) params.append("minPrice", minPrice);
+      if(maxPrice) params.append("maxPrice", maxPrice);
+      if (type && type !== 'Any') params.append('type', type);
+      navigate(`/list?${params.toString()}`)
     }catch(error){
       console.log(error)
     }
   }
-
 
   return (
     <div className="bg-secondary-color p-10 rounded-lg">
@@ -105,6 +101,7 @@ function SearchFilters() {
           />
           <SelectFilter onChange={e =>{
             setType(e.target.value)
+            console.log(e.target.value)
           }}
             label="Buy or Rent"
             name="type"
