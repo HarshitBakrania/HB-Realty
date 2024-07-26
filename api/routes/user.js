@@ -20,6 +20,51 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/userPosts", authMiddleware, async (req, res) => {
+  const userIdToken = req.userId;
+  try{
+    const userPosts = await prisma.post.findMany({
+      where:{
+        userId: userIdToken
+      }
+    })
+    const saved = await prisma.savedPost.findMany({
+      where:{
+        userId: userIdToken
+      },
+      include:{
+        post:true
+      }
+    })
+    const savedPosts = saved.map(item => item.post)
+    res.status(200).json({userPosts: userPosts, savedPosts: savedPosts})
+  }catch(error){
+    console.log(error)
+    res.status(500).json({message: "failed to get user posts!"})
+  }
+})
+
+router.delete("/:id", authMiddleware, async (req, res) => {
+  const id = req.params.id;
+  const userIdToken = req.userId;
+
+  if (id !== userIdToken) {
+    return res.status(403).json({
+      message: "Unauthorized",
+    });
+  }
+
+  try {
+    const deletedUser = await prisma.user.delete({
+      where: { id },
+    });
+    res.status(200).json({ message: `${deletedUser.username} deleted!` });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "failed to delete user!" });
+  }
+});
+
 router.get("/:id", authMiddleware, async (req, res) => {
   const id = req.params.id;
   try {
@@ -99,27 +144,6 @@ router.post("/save", authMiddleware, async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "failed to save post!" });
-  }
-});
-
-router.delete("/:id", authMiddleware, async (req, res) => {
-  const id = req.params.id;
-  const userIdToken = req.userId;
-
-  if (id !== userIdToken) {
-    return res.status(403).json({
-      message: "Unauthorized",
-    });
-  }
-
-  try {
-    const deletedUser = await prisma.user.delete({
-      where: { id },
-    });
-    res.status(200).json({ message: `${deletedUser.username} deleted!` });
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: "failed to delete user!" });
   }
 });
 

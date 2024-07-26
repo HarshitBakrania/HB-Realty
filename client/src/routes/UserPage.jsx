@@ -4,8 +4,11 @@ import { AuthContext } from "../context/AuthContext";
 import { Navigate, useNavigate } from "react-router-dom"
 import axios from "axios"
 import NavBar from "../components/NavBar";
+import { useUserPosts } from "../hooks/useUserPosts";
 
 export const UserPage = () =>{
+    const { posts, loading} = useUserPosts();
+    console.log(posts)
     const {updateUser, currentUser} = useContext(AuthContext);
     const navigate = useNavigate();
 
