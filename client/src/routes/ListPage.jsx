@@ -6,51 +6,81 @@ import PropertyCard from "../components/PropertyCard";
 import { SelectFilter } from "../components/SelectFilter";
 import { Map } from "../components/Map";
 import { usePosts } from "../hooks/usePosts";
+import { useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 export const ListPage = () => {
     const { posts, loading } = usePosts();
-    
+    const[city, setCity] = useState("");
+    const[minPrice, setMinPrice] = useState("");
+    const[maxPrice, setMaxPrice] = useState("");
+    const[type, setType] = useState("Any");
+    const[property, setProperty] = useState("Any")
+    const[bedroom, setBedroom] = useState(0);
+    const navigate = useNavigate();
+
     if(loading){
         return <div>loading...</div>
     }
 
-    const data = posts;
+    const handleFilter = () => {
+        const params = new URLSearchParams();
+        if(city) params.append("city", city.toLowerCase());
+        if(type && type !== "Any") params.append("type", type.toLowerCase());
+        if(property && property !== "Any") params.append("property", property.toLowerCase());
+        if(minPrice) params.append("minPrice", minPrice);
+        if(maxPrice) params.append("maxPrice", maxPrice);
+        if(bedroom && bedroom !== 0) params.append("bedroom", bedroom.toLowerCase());
+        navigate(`/list?${params.toString()}`)
+    };
+
     return (
         <div>
             <NavBar />
             <div className="grid grid-cols-5 bg-background-color">
-                <div className= " px-10 py-5 space-y-10 h-[100vh] col-span-1 border-slate-600 border-r text-white">
+                <div className= " px-10 py-5 space-y-10 col-span-1 border-slate-600 border-r text-white">
                     <div className="text-xl font-semibold">
                         Filters
                     </div>
                     <div>
-                        <InputBox label="Location" placeholder="City Location" type="text"/>
+                        <InputBox onChange={e =>{
+                            setCity(e.target.value);
+                        }} label="Location" placeholder="City Location" type="text"/>
                     </div>
                     <div className="flex justify-between">
-                        <SelectFilter label="Type" name="type" options={["Any","Buy", "Rent"]} />
-                        <SelectFilter label="Property" name="property" options={["Any", "Apartment", "House", "Land"]} />
+                        <SelectFilter onChange={e =>{
+                            setType(e.target.value);
+                        }} value={type} label="Type" name="type" options={["Any","Buy", "Rent"]} />
+                        <SelectFilter onChange={e =>{
+                            setProperty(e.target.value);
+                        }} value={property} label="Property" name="property" options={["Any", "Apartment", "House", "Land"]} />
                     </div>
                     <div className="flex justify-between">
                         <div className="flex flex-col max-w-24">
                             <label>Min Price</label>
-                            <input type="number" className="text-black"></input>
+                            <input onChange={e =>{
+                                setMinPrice(e.target.value);
+                            }} type="number" className="text-black"></input>
                         </div>
                         <div className="flex flex-col max-w-24">
                             <label>Max Price</label>
-                            <input type="number" className="text-black"></input>
+                            <input onChange={e =>{
+                                setMaxPrice(e.target.value);
+                            }} type="number" className="text-black"></input>
                         </div>
                     </div>
-                    <SelectFilter label="Bedrooms" name="bedroom" options={["Any", "1", "2", "3+"]} />
-                    <Button label="Search" onClick={() => {}}/>
-
+                    <InputBox onChange={e =>{
+                        setBedroom(e.target.value);
+                    }} label="Bedrooms" name="bedroom" placeholder="Number of Bedrooms" type="number"/>
+                    <Button label="Search" onClick={handleFilter}/>
                 </div>
                 <div className="col-span-2 text-white space-y-5 p-8 border-r border-slate-600">
-                    {data.map(item=>(
+                    {posts.map(item=>(
                         <PropertyCard key={item.id} item={item}/>
                     ))}
                 </div>
                 <div className="col-span-2 text-white p-20 px-20 rounded-sm h-screen">
-                    <Map items={data}/>
+                    <Map items={posts}/>
                 </div>
             </div>
         </div>

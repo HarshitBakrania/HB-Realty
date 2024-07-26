@@ -1,12 +1,16 @@
 import Bed from "../assets/bed.svg"
 import Bathroom from "../assets/bathroom.svg"
 import MapPin from "./MapPin"
+import { useNavigate } from "react-router-dom"
 export default function PropertyCard({item}){
+    const navigate = useNavigate();
     return (
         <div className="grid grid-cols-5">
             <img src={item.img} className="col-span-2 rounded-lg"></img>
-            <div className="col-span-3 pl-3 space-y-2 grid grid-rows-4">
-                <div className="text-2xl font-semibold row-span-1">Apartment {item.id}</div>
+            <div className="col-span-3 pl-3 space-y-2 grid grid-rows-4 hover:cursor-pointer">
+                <div onClick={() =>{
+                    navigate(`/posts/${item.id}`)
+                }} className="text-2xl font-semibold row-span-1">{item.title}</div>
                 <div className="flex text-neutral-400 text-sm row-span-1"><MapPin />{item.address}</div>
                 <div className="flex row-span-1 items-center justify-between">
                     <div className="flex">

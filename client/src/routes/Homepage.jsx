@@ -58,7 +58,7 @@ function SearchFilters() {
   const GetProperties = async() =>{
     try{
       const params = new URLSearchParams();
-      if(city) params.append("city", city);
+      if(city) params.append("city", city.toLowerCase());
       if(minPrice) params.append("minPrice", minPrice);
       if(maxPrice) params.append("maxPrice", maxPrice);
       if (type && type !== 'Any') params.append('type', type.toLowerCase());
@@ -101,7 +101,6 @@ function SearchFilters() {
           />
           <SelectFilter onChange={e =>{
             setType(e.target.value)
-            console.log(e.target.value)
           }}
             value={type}
             label="Buy or Rent"

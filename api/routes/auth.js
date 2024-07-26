@@ -80,7 +80,6 @@ router.post("/logout", (req,res) =>{
     res.clearCookie("authToken").status(200).json({
         message: "Logged out successfully"
     })
-   
 })
 
 export default router

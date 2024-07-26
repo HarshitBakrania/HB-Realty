@@ -3,15 +3,42 @@ import Button from "../components/Button"
 import MapPin from "../components/MapPin"
 import NavBar from "../components/NavBar"
 import TextIcon from "../components/TextIcon"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { usePost } from "../hooks/usePost"
 import DOMPurify from 'dompurify';
 import { Map } from "../components/Map"
+import { useContext, useEffect, useState } from "react"
+import { AuthContext } from "../context/AuthContext"
+import axios from "axios"
 
 export const PropertyPage = () =>{
     const { id } = useParams();
     const { post, loading } = usePost({id});
+    const {currentUser} = useContext(AuthContext);
+    const [saved, setSaved] = useState(false);
+    const navigate = useNavigate();
 
+    useEffect(() =>{
+        if(!loading && post){
+            setSaved(post.isSaved || false);
+        }
+    },[loading, post]);
+
+    const savePost = async() =>{
+        setSaved((prev) => !prev);
+        if(!currentUser){
+            navigate("/signin")
+        }
+        try{
+            await axios.post("http://localhost:3000/api/users/save", {postId: post.id},{
+                withCredentials: true
+            });
+            
+        }catch(error){
+            console.log(error)
+            setSaved((prev) => !prev);
+        }
+    }
     //TODO: add loading skeleton
     if (loading) return <div>Loading...</div>;
 
@@ -94,7 +121,7 @@ export const PropertyPage = () =>{
                             </Button>
                         </div>
                         <div className="flex">
-                            <Button label="Save the post" >
+                            <Button label={saved ? "Place is saved" : "Save Place"} onClick={savePost} >
                                 <Bookmark />
                             </Button>
                         </div>
