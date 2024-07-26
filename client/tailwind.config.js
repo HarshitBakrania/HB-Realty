@@ -9,7 +9,8 @@ export default {
       colors:{
         "background-color" : "#0F0F10",
         "secondary-color": "#18181B",
-        "navbar-color": "#E6E6E6"
+        "navbar-color": "#E6E6E6",
+        "message-color": "#3D3D43"
       }
     },
   },
