@@ -1,7 +1,7 @@
 import Bed from "../assets/bed.svg"
 import Bathroom from "../assets/bathroom.svg"
-import MapPin from "./MapPin"
 import { useNavigate } from "react-router-dom"
+import { MapPin } from "./icons/icons";
 export default function PropertyCard({item}){
     const navigate = useNavigate();
     return (

@@ -82,9 +82,9 @@ export const MessagePage = () => {
   }
 
   return (
-    <div className="flex flex-col h-screen bg-background-color text-white">
+    <div className="flex flex-col h-screen bg-background-color">
       <NavBar />
-      <div className="flex-1 flex overflow-hidden">
+      <div className="flex-1 flex overflow-hidden text-white">
         <div className="w-1/4 flex flex-col border-r border-slate-600">
           <div className="p-4 bg-black">
             <button className="flex items-center bg-secondary-color p-3 rounded-lg space-x-2">
@@ -125,6 +125,7 @@ export const MessagePage = () => {
                     name={messages.receiver.username}
                     message={m.text}
                     time={format(m.createdAt)}
+                    avatar={messages.receiver.avatar}
                   />
                 );
               })}

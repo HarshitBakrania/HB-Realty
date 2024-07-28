@@ -1,6 +1,5 @@
 import Bookmark from "../components/Bookmark"
 import Button from "../components/Button"
-import MapPin from "../components/MapPin"
 import NavBar from "../components/NavBar"
 import TextIcon from "../components/TextIcon"
 import { useNavigate, useParams } from "react-router-dom"
@@ -10,6 +9,7 @@ import { Map } from "../components/Map"
 import { useContext, useEffect, useState } from "react"
 import { AuthContext } from "../context/AuthContext"
 import axios from "axios"
+import { MapPin } from "../components/icons/icons"
 
 export const PropertyPage = () =>{
     const { id } = useParams();

@@ -3,7 +3,7 @@ export default function Button({label, onClick, className, children, id}) {
         <div>
             <button 
                 onClick={onClick} 
-                className={`bg-white text-black py-2 px-4 rounded flex items-center justify-center ${className}`}
+                className={`bg-white text-black py-2 px-4 rounded flex items-center justify-center hover:bg-gray-200 ${className}`}
                 id={id}
             >
                 {children && <div>{children}</div>}

@@ -8,6 +8,7 @@ import { UserPage } from "./routes/UserPage";
 import { MessagePage } from "./routes/MessagePage";
 import { UpdatePage } from "./routes/UpdatePage";
 import { NewPostPage } from "./routes/NewPostPage";
+import Footer from "./components/Footer";
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           <Route path="/posts/create" element={<NewPostPage />} />
         </Routes>
       </BrowserRouter>
+      <Footer />
     </div>
   )
 }

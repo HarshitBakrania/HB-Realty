@@ -49,8 +49,9 @@ export const UserPage = () =>{
                         <Button label="Update Profile" onClick={() => navigate("/user/update")} />
                     </div>
                     <div className="space-y-4">
-                        <div className="text-lg font-semibold">
-                            Avatar:
+                        <div className="text-lg font-semibold flex">
+                            <div className="py-6">Avatar: </div>
+                            <img src={currentUser.avatar} className="rounded-full size-20 ml-4"></img>
                         </div>
                         <div className="text-lg font-semibold">
                             Username: {currentUser.username}

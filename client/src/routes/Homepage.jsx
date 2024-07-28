@@ -5,7 +5,6 @@ import { InputBox } from "../components/InputBox";
 import { SelectFilter } from "../components/SelectFilter";
 import Button from "../components/Button";
 import { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 export const Homepage = () => {
@@ -28,12 +27,12 @@ export const Homepage = () => {
             <div>
               <SearchFilters />
             </div>
-            <div className="text-white grid grid-cols-2 font-semibold text-xl pt-6">
-              <div className="space-y-4">
+            <div className="text-white grid grid-cols-2 font-semibold text-3xl py-16">
+              <div className="space-y-14">
                 <div>500+ Properties Sold</div>
                 <div>98% Customer Satisfaction</div>
               </div>
-              <div className="space-y-4">
+              <div className="space-y-14">
                 <div>$1B+ Sales</div>
                 <div>15+ Years in Business</div>
               </div>
@@ -49,24 +48,24 @@ export const Homepage = () => {
 };
 
 function SearchFilters() {
-  const[city, setCity] = useState("");
-  const[minPrice, setMinPrice] = useState("");
-  const[maxPrice, setMaxPrice] = useState("");
-  const[type, setType] = useState("");
+  const [city, setCity] = useState("");
+  const [minPrice, setMinPrice] = useState("");
+  const [maxPrice, setMaxPrice] = useState("");
+  const [type, setType] = useState("");
   const navigate = useNavigate();
 
-  const GetProperties = async() =>{
-    try{
+  const GetProperties = async () => {
+    try {
       const params = new URLSearchParams();
-      if(city) params.append("city", city.toLowerCase());
-      if(minPrice) params.append("minPrice", minPrice);
-      if(maxPrice) params.append("maxPrice", maxPrice);
-      if (type && type !== 'Any') params.append('type', type.toLowerCase());
-      navigate(`/list?${params.toString()}`)
-    }catch(error){
-      console.log(error)
+      if (city) params.append("city", city.toLowerCase());
+      if (minPrice) params.append("minPrice", minPrice);
+      if (maxPrice) params.append("maxPrice", maxPrice);
+      if (type && type !== "Any") params.append("type", type.toLowerCase());
+      navigate(`/list?${params.toString()}`);
+    } catch (error) {
+      console.log(error);
     }
-  }
+  };
 
   return (
     <div className="bg-secondary-color p-10 rounded-lg">
@@ -75,33 +74,37 @@ function SearchFilters() {
       </div>
       <div className="p-4 rounded-lg text-white">
         <div className="grid grid-cols-4 gap-4">
-          <InputBox onChange={e =>{
-            setCity(e.target.value)
-          }}
+          <InputBox
+            onChange={(e) => {
+              setCity(e.target.value);
+            }}
             label="City"
             placeholder="Enter a City"
             type="text"
             className="w-full"
           />
-          <InputBox onChange={e =>{
-            setMinPrice(e.target.value)
-          }}
+          <InputBox
+            onChange={(e) => {
+              setMinPrice(e.target.value);
+            }}
             label="Min. Price"
             placeholder="0"
             type="number"
             className="w-full"
           />
-          <InputBox onChange={e =>{
-            setMaxPrice(e.target.value)
-          }}
+          <InputBox
+            onChange={(e) => {
+              setMaxPrice(e.target.value);
+            }}
             label="Max. Price"
             placeholder="1,000,000"
             type="number"
             className="w-full"
           />
-          <SelectFilter onChange={e =>{
-            setType(e.target.value)
-          }}
+          <SelectFilter
+            onChange={(e) => {
+              setType(e.target.value);
+            }}
             value={type}
             label="Buy or Rent"
             name="type"
@@ -109,7 +112,11 @@ function SearchFilters() {
             className="w-full space-y-4 p-2.5 text-slate-500 rounded-lg"
           />
         </div>
-        <Button label="Search" onClick={GetProperties} className="mt-10 w-full" />
+        <Button
+          label="Search"
+          onClick={GetProperties}
+          className="mt-10 w-full"
+        />
       </div>
     </div>
   );
