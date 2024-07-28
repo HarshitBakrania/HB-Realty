@@ -11,7 +11,6 @@ export const useChat = () => {
         const response = await axios.get("http://localhost:3000/api/chats", {
           withCredentials: true,
         });
-        console.log(response.data);
         setChat(response.data);
         setLoading(false);
       } catch (error) {
@@ -21,7 +20,7 @@ export const useChat = () => {
     };
 
     fetchChat();
-  }, []); // Empty dependency array ensures it runs only once
+  }, []); 
 
   const updateLastMessage = (chatId, newMessage) => {
     setChat((prevChat) =>

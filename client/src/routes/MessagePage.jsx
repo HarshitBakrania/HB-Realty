@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import NavBar from "../components/NavBar";
 import { AuthContext } from "../context/AuthContext";
 import { Navigate } from "react-router-dom";
@@ -8,16 +8,25 @@ import { ChatCard, UserChatCard } from "../components/ChatCard.jsx";
 import { useChat } from "../hooks/useChat.js";
 import axios from "axios";
 import { format } from "timeago.js";
+import { SocketContext } from "../context/SocketContext.jsx";
+import { AddIcon } from "../components/icons/icons.jsx";
 
 export const MessagePage = () => {
   const { currentUser } = useContext(AuthContext);
-  const [messages, setMessages] = useState(null);
+  const { socket } = useContext(SocketContext);
+  const [messages, setMessages] = useState("");
   const [text, setText] = useState("");
   const { chat, loading, updateLastMessage } = useChat();
   console.log(chat);
 
+  const messageEndRef = useRef();
+
   useEffect(() => {
-    const fetchMessages = async () => {
+    messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
+  useEffect(() => {
+    const lastChat = async () => {
       if (chat && chat.length > 0) {
         try {
           const response = await axios.get(
@@ -32,8 +41,36 @@ export const MessagePage = () => {
         }
       }
     };
-    fetchMessages();
+    lastChat();
   }, [chat]);
+
+  useEffect(() => {
+    const readMessage = async () => {
+      try {
+        await axios.put(`http://localhost:3000/api/chats/read/${messages.id}`, {
+          withCredentials: true,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    if (messages && socket) {
+      socket.on("getMessage", (data) => {
+        if (messages.id === data.chatId) {
+          setMessages((prev) => ({
+            ...prev,
+            messages: [...prev.messages, data],
+          }));
+          readMessage();
+        }
+      });
+
+      return () => {
+        socket.off("getMessage");
+      };
+    }
+  }, [socket, messages]);
 
   const openChat = async (id, receiver) => {
     try {
@@ -44,13 +81,13 @@ export const MessagePage = () => {
         }
       );
       setMessages({ ...response.data, receiver });
-      console.log(messages);
     } catch (err) {
       console.log(err);
     }
   };
 
   const sendText = async () => {
+    if (!text) return;
     try {
       const response = await axios.post(
         `http://localhost:3000/api/messages/${messages.id}`,
@@ -61,24 +98,27 @@ export const MessagePage = () => {
           withCredentials: true,
         }
       );
-      console.log(text);
       setMessages((prev) => ({
         ...prev,
         messages: [...prev.messages, response.data],
       }));
       updateLastMessage(messages.id, response.data.text);
       setText("");
+      socket.emit("sendMessage", {
+        receiverId: messages.receiver.id,
+        data: response.data,
+      });
     } catch (error) {
       console.log(error);
     }
   };
 
-  if (!currentUser) {
-    return <Navigate to="/signin" />;
-  }
-
   if (loading) {
     return <div>Loading...</div>;
+  }
+
+  if (!currentUser) {
+    return <Navigate to="/signin" />;
   }
 
   return (
@@ -93,13 +133,19 @@ export const MessagePage = () => {
             </button>
           </div>
           <div className="flex-1 overflow-y-auto">
-            {chat.map((c) => {
+            {chat?.map((c) => {
+              let seen = c.seenBy.includes(currentUser.id);
               return (
                 <MessageCard
                   name={c.receiver.username}
                   message={c.lastMessage}
                   onClick={() => openChat(c.id, c.receiver)}
                   key={c.id}
+                  className={
+                    seen || messages?.id === c.id
+                      ? "bg-background-700"
+                      : "bg-slate-700"
+                  }
                 />
               );
             })}
@@ -125,10 +171,18 @@ export const MessagePage = () => {
                     name={messages.receiver.username}
                     message={m.text}
                     time={format(m.createdAt)}
-                    avatar={messages.receiver.avatar}
+                    avatar={
+                      messages.receiver.avatar ? (
+                        <img
+                          src={messages.receiver.avatar}
+                          className="rounded-full size-12"
+                        />
+                      ) : null
+                    }
                   />
                 );
               })}
+              <div ref={messageEndRef}></div>
             </div>
 
             <div className="p-4 border-t border-slate-600">
@@ -151,25 +205,6 @@ export const MessagePage = () => {
     </div>
   );
 };
-
-function AddIcon() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke-width="1.5"
-      stroke="currentColor"
-      class="size-6"
-    >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        d="M12 4.5v15m7.5-7.5h-15"
-      />
-    </svg>
-  );
-}
 
 function SendButton({ onClick }) {
   return (

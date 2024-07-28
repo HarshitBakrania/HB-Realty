@@ -1,6 +1,6 @@
-import { Homepage } from "./routes/Homepage"
+import { Homepage } from "./routes/Homepage";
 import { ListPage } from "./routes/ListPage";
-import { BrowserRouter, Routes, Route} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { PropertyPage } from "./routes/PropertyPage";
 import { SignUpPage } from "./routes/SignUpPage";
 import { SignInPage } from "./routes/SignInPage";
@@ -10,13 +10,12 @@ import { UpdatePage } from "./routes/UpdatePage";
 import { NewPostPage } from "./routes/NewPostPage";
 import Footer from "./components/Footer";
 
-
 function App() {
   return (
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path= "/" element={<Homepage />} />
+          <Route path="/" element={<Homepage />} />
           <Route path="list" element={<ListPage />} />
           <Route path="/posts/:id" element={<PropertyPage />} />
           <Route path="/signup" element={<SignUpPage />} />
@@ -27,9 +26,8 @@ function App() {
           <Route path="/posts/create" element={<NewPostPage />} />
         </Routes>
       </BrowserRouter>
-      <Footer />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -51,7 +51,7 @@ export const UserPage = () =>{
                     <div className="space-y-4">
                         <div className="text-lg font-semibold flex">
                             <div className="py-6">Avatar: </div>
-                            <img src={currentUser.avatar} className="rounded-full size-20 ml-4"></img>
+                            {currentUser.avatar ? <img src ={currentUser.avatar} className="rounded-full size-20 ml-4" /> : null}
                         </div>
                         <div className="text-lg font-semibold">
                             Username: {currentUser.username}

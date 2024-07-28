@@ -38,6 +38,32 @@ router.get("/", authMiddleware, async(req, res) =>{
     }
 })
 
+router.put("/read/:id", authMiddleware, async(req, res) =>{
+    console.log("Read chat")
+    const userIdToken = req.userId;
+    try{
+        const chat = await prisma.chat.update({
+            where:{
+                id: req.params.id,
+                userIDs:{
+                    hasSome:[userIdToken]
+                }
+            },
+            data:{
+                seenBy:{
+                    push:[userIdToken]
+                }
+            }
+        })
+        res.status(200).json(chat);
+        console.log(chat)
+    }catch(error){
+        console.log(error)
+        res.status(500).json({ message: "Failed to read chat"});
+    }
+})
+
+
 router.get("/:id", authMiddleware, async(req, res) =>{
     console.log("Get chat endpoint");
     const userIdToken = req.userId;
@@ -90,28 +116,5 @@ router.post("/", authMiddleware, async(req, res) =>{
     }
 })
 
-router.put("/read/:id", authMiddleware, async(req, res) =>{
-    console.log("Read chat")
-    const userIdToken = req.userId;
-    try{
-        const chat = await prisma.chat.update({
-            where:{
-                id: req.params.id,
-                userIDs:{
-                    hasSome:[userIdToken]
-                }
-            },
-            data:{
-                seenBy:{
-                    push:[userIdToken]
-                }
-            }
-        })
-        res.status(200).json(chat);
-    }catch(error){
-        console.log(error)
-        res.status(500).json({ message: "Failed to read chat"});
-    }
-})
 
 export default router;

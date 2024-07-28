@@ -1,6 +1,6 @@
 import ProfileIcon from "./ProfileIcon"
 
-export const MessageCard = ({name,message, className, onClick}) =>{
+export const MessageCard = ({name,message, className, onClick, children}) =>{
     return(
         <div className={`text-white p-4 border-b border-slate-600 w-full flex hover:cursor-pointer ${className}`} onClick={onClick}>
             <ProfileIcon size={40}/>
