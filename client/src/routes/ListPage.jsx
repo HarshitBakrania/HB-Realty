@@ -37,7 +37,7 @@ export const ListPage = () => {
     return (
         <div>
             <NavBar />
-            <div className="grid grid-cols-5 bg-background-color">
+            <div className="grid grid-cols-6 bg-background-color">
                 <div className= " px-10 py-5 space-y-10 col-span-1 border-slate-600 border-r text-white">
                     <div className="text-xl font-semibold">
                         Filters
@@ -74,7 +74,7 @@ export const ListPage = () => {
                     }} label="Bedrooms" name="bedroom" placeholder="Number of Bedrooms" type="number"/>
                     <Button label="Search" onClick={handleFilter}/>
                 </div>
-                <div className="col-span-2 text-white space-y-5 p-8 border-r border-slate-600">
+                <div className="col-span-3 text-white space-y-5 p-8 border-r border-slate-600">
                     {posts.map(item=>(
                         <PropertyCard key={item.id} item={item}/>
                     ))}

@@ -7,7 +7,7 @@ const io = new Server({
 });
 
 let onlineUser = [];
-console.log(onlineUser)
+console.log(onlineUser);
 
 const addUser = (userId, socketId) => {
   const userExists = onlineUser.find((user) => user.userId === userId);
@@ -27,18 +27,20 @@ const getUser = (userId) => {
 io.on("connection", (socket) => {
   socket.on("newUser", (userId) => {
     addUser(userId, socket.id);
-    console.log(addUser)
   });
 
   socket.on("sendMessage", ({ receiverId, data }) => {
-    const receiver = getUser(receiverId);
-    console.log(receiver)
-    // io.to(receiver.socketId).emit("getMessage", data);
+    try {
+      const receiver = getUser(receiverId);
+      console.log(receiver);
+      io.to(receiver.socketId).emit("getMessage", data);
+    } catch (err) {
+      console.log(err);
+    }
   });
 
   socket.on("disconnect", () => {
     removeUser(socket.id);
-    console.log(removeUser)
   });
 });
 

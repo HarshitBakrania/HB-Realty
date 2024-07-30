@@ -10,6 +10,7 @@ import axios from "axios";
 import { format } from "timeago.js";
 import { SocketContext } from "../context/SocketContext.jsx";
 import { AddIcon } from "../components/icons/icons.jsx";
+import useNotificationStore from "../store/hooks/useNotificationStore.js";
 
 export const MessagePage = () => {
   const { currentUser } = useContext(AuthContext);
@@ -17,7 +18,7 @@ export const MessagePage = () => {
   const [messages, setMessages] = useState("");
   const [text, setText] = useState("");
   const { chat, loading, updateLastMessage } = useChat();
-  console.log(chat);
+  const {notification, decrease} = useNotificationStore();
 
   const messageEndRef = useRef();
 
@@ -80,6 +81,7 @@ export const MessagePage = () => {
           withCredentials: true,
         }
       );
+      decrease();
       setMessages({ ...response.data, receiver });
     } catch (err) {
       console.log(err);

@@ -22,27 +22,27 @@ router.get("/", async (req, res) => {
 
 router.get("/userPosts", authMiddleware, async (req, res) => {
   const userIdToken = req.userId;
-  try{
+  try {
     const userPosts = await prisma.post.findMany({
-      where:{
-        userId: userIdToken
-      }
-    })
-    const saved = await prisma.savedPost.findMany({
-      where:{
-        userId: userIdToken
+      where: {
+        userId: userIdToken,
       },
-      include:{
-        post:true
-      }
-    })
-    const savedPosts = saved.map(item => item.post)
-    res.status(200).json({userPosts: userPosts, savedPosts: savedPosts})
-  }catch(error){
-    console.log(error)
-    res.status(500).json({message: "failed to get user posts!"})
+    });
+    const saved = await prisma.savedPost.findMany({
+      where: {
+        userId: userIdToken,
+      },
+      include: {
+        post: true,
+      },
+    });
+    const savedPosts = saved.map((item) => item.post);
+    res.status(200).json({ userPosts: userPosts, savedPosts: savedPosts });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "failed to get user posts!" });
   }
-})
+});
 
 router.delete("/:id", authMiddleware, async (req, res) => {
   const id = req.params.id;
@@ -62,6 +62,29 @@ router.delete("/:id", authMiddleware, async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "failed to delete user!" });
+  }
+});
+
+router.get("/notification", authMiddleware, async (req, res) => {
+  const userIdToken = req.userId;
+  try {
+    const number = await prisma.chat.count({
+      where: {
+        userIDs: {
+          hasSome: [userIdToken],
+        },
+        NOT: {
+          seenBy: {
+            hasSome: [userIdToken],
+          },
+        },
+      },
+    });
+    res.status(200).json(number);
+    console.log(number)
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "failed to get notifications!" });
   }
 });
 
