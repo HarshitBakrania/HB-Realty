@@ -1,7 +1,5 @@
-import Bookmark from "../components/Bookmark";
 import Button from "../components/Button";
 import NavBar from "../components/NavBar";
-import TextIcon from "../components/TextIcon";
 import { useNavigate, useParams } from "react-router-dom";
 import { usePost } from "../hooks/usePost";
 import DOMPurify from "dompurify";
@@ -9,7 +7,7 @@ import { Map } from "../components/Map";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import axios from "axios";
-import { MapPin, CheckCircle } from "../components/icons/icons";
+import TextIcon, { MapPin, CheckCircle, Bookmark } from "../components/icons/icons";
 
 export const PropertyPage = () => {
   const { id } = useParams();
@@ -52,7 +50,7 @@ export const PropertyPage = () => {
   return (
     <div>
       <NavBar />
-      <div className="bg-background-color h-screen grid grid-cols-3 text-white">
+      <div className="bg-background-color h-full grid grid-cols-3 text-white">
         <div className="col-span-2 px-32 py-10 space-y-2 border-r border-slate-600">
           <ImageGallery images={post.images} />
           <div className="text-3xl font-bold grid grid-cols-4 pt-10">

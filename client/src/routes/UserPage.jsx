@@ -33,11 +33,11 @@ export const UserPage = () =>{
             <NavBar/>
             <div className="text-white grid grid-cols-4 bg-background-color h-[100vh]">
                 <div className="col-span-3">
-                    <div className="p-10 flex justify-between">
+                    <div className="py-16 px-20 flex justify-between">
                         <div className="text-3xl font-semibold">
                             Your Listings
                         </div>
-                        <Button label="Create New Listing" />
+                        <Button label="Create New Listing" className="text-lg"/>
                     </div>
                     
                 </div> 

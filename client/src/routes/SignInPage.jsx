@@ -56,14 +56,14 @@ export const SignInPage = () => {
                         setPassword(e.target.value)
                     }} label="Password" placeholder="Enter your password" type="password"/>
                     <div className="w-full">
-                        <Button onClick={LoginUser} label="Sign In"/>
+                        <Button onClick={LoginUser} label="Sign In" className="w-full mt-6"/>
                     </div>
                     <div className="text-red-600 font-medium text-base">
                         {error}
                     </div>
                     <div>
                         Don't have an account? 
-                        <Link to="/signup" className="underline pl-2 font-semibold">Register</Link>
+                        <Link to="/signup" className="underline pl-2 font-semibold">Sign Up</Link>
                     </div>
                 </div>
             </div>  

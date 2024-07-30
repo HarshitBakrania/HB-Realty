@@ -79,7 +79,7 @@ export const ListPage = () => {
                         <PropertyCard key={item.id} item={item}/>
                     ))}
                 </div>
-                <div className="col-span-2 text-white p-20 px-20 rounded-sm h-screen">
+                <div className="col-span-2 text-white p-10 rounded-sm h-screen">
                     <Map items={posts}/>
                 </div>
             </div>

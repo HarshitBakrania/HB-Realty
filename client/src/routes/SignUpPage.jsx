@@ -49,7 +49,7 @@ export const SignUpPage = () => {
                     <InputBox onChange={e =>{
                         setPassword(e.target.value)
                     }} type="password" label="Password" placeholder="***********" />
-                    <Button onClick={RegisterUser} label="Register" />
+                    <Button onClick={RegisterUser} label="Register" className="w-full mt-6" />
                     <div className="text-red-600 font-medium text-base">
                         {error}
                     </div>
