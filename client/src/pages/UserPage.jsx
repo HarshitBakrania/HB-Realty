@@ -38,7 +38,9 @@ export const UserPage = () =>{
                         <div className="text-3xl font-semibold">
                             Your Listings
                         </div>
-                        <Button label="Create New Listing" className="text-lg"/>
+                        <Button label="Create New Listing" className="text-lg" onClick={() =>{
+                            navigate("/posts/create")
+                        }}/>
                     </div>
                     
                 </div> 

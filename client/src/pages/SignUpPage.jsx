@@ -29,10 +29,10 @@ export const SignUpPage = () => {
     }
 
     return (
-        <div className="bg-background-color h-[100vh]">
+        <div className="bg-background-color h-full">
             <NavBar />
-            <div className="text-white">
-                <div className="text-center pt-24 space-y-2">
+            <div className="text-white h-[100vh] py-40">
+                <div className="text-center space-y-2">
                     <div className="text-3xl font-bold">
                         Register
                     </div>
