@@ -1,13 +1,13 @@
-import { Homepage } from "./routes/Homepage";
-import { ListPage } from "./routes/ListPage";
+import { Homepage } from "./pages/Homepage";
+import { ListPage } from "./pages/ListPage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { PropertyPage } from "./routes/PropertyPage";
-import { SignUpPage } from "./routes/SignUpPage";
-import { SignInPage } from "./routes/SignInPage";
-import { UserPage } from "./routes/UserPage";
-import { MessagePage } from "./routes/MessagePage";
-import { UpdatePage } from "./routes/UpdatePage";
-import { NewPostPage } from "./routes/NewPostPage";
+import { PropertyPage } from "./pages/PropertyPage";
+import { SignUpPage } from "./pages/SignUpPage";
+import { SignInPage } from "./pages/SignInPage";
+import { UserPage } from "./pages/UserPage";
+import { MessagePage } from "./pages/MessagePage";
+import { UpdatePage } from "./pages/UpdatePage";
+import { NewPostPage } from "./pages/NewPostPage";
 import Footer from "./components/Footer";
 
 function App() {

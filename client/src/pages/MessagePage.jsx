@@ -82,7 +82,7 @@ export const MessagePage = () => {
         }
       );
       decrease();
-      setMessages({ ...response.data, receiver });
+      setMessages({ ...response.data, receiver });x
     } catch (err) {
       console.log(err);
     }

@@ -7,7 +7,12 @@ import { Map } from "../components/Map";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import axios from "axios";
-import TextIcon, { MapPin, CheckCircle, Bookmark } from "../components/icons/icons";
+import TextIcon, {
+  MapPin,
+  CheckCircle,
+  Bookmark,
+} from "../components/icons/icons";
+import Footer from "../components/Footer";
 
 export const PropertyPage = () => {
   const { id } = useParams();
@@ -53,24 +58,34 @@ export const PropertyPage = () => {
       <div className="bg-background-color h-full grid grid-cols-3 text-white">
         <div className="col-span-2 px-32 py-10 space-y-2 border-r border-slate-600">
           <ImageGallery images={post.images} />
-          <div className="text-3xl font-bold grid grid-cols-4 pt-10">
-            <div className="col-span-3">{post.title}</div>
-            <div className="col-span-1 flex items-center">
-              {post.user.username}
-              <img src={post.user.avatar} className="rounded-full ml-5" />
+          <div className="grid grid-cols-4">
+            <div className="col-span-3 mt-5 space-y-8">
+              <div className="text-4xl font-bold">{post.title}</div>
+              <div className="flex text-xl text-gray-300">
+                <MapPin />
+                {post.address}
+              </div>
+              <div
+                className="text-2xl text-gray-300"
+                dangerouslySetInnerHTML={{
+                  __html: DOMPurify.sanitize(post.postDetail.description),
+                }}
+              ></div>
+              <div className="text-2xl bg-navbar-color max-w-max px-4 py-2 rounded-lg text-black">
+                ${post.price}
+              </div>
+            </div>
+            <div className="col-span-1 mt-10 px-4">
+              <div className="font-semibold text-2xl text-center">Owner Details</div>
+              <div className="mt-3 flex items-center mx-20">
+                <div className="font-bold text-2xl">{post.user.username}</div>
+                <img
+                  src={post.user.avatar}
+                  className="rounded-full ml-5 size-20"
+                />
+              </div>
             </div>
           </div>
-          <div className="flex">
-            <MapPin />
-            {post.address}
-          </div>
-          <div className="text-2xl">$ {post.price}</div>
-          <div
-            className="text-xl"
-            dangerouslySetInnerHTML={{
-              __html: DOMPurify.sanitize(post.postDetail.description),
-            }}
-          ></div>
         </div>
         <div className="col-span-1 px-14 py-10">
           <div className="text-2xl font-semibold">General</div>
@@ -159,26 +174,35 @@ export const PropertyPage = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
 
 const ImageGallery = ({ images }) => (
-    <div className="grid grid-cols-4 gap-2">
-      <div className="col-span-3 h-full">
-        <img src={images[0]} alt="Main" className="w-full h-full object-cover rounded-lg" />
-      </div>
-      <div className="grid grid-rows-3 gap-2 h-full">
-        {images.slice(1, 4).map((img, index) => (
-          <div key={index} className="relative h-full">
-            <img src={img} alt={`Thumbnail ${index + 1}`} className="w-full h-full object-cover rounded-lg" />
-            {index === 2 && images.length > 4 && (
-              <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-lg">
-                <span className="text-white text-2xl">+{images.length - 4}</span>
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
+  <div className="grid grid-cols-4 gap-2">
+    <div className="col-span-3 h-full">
+      <img
+        src={images[0]}
+        alt="Main"
+        className="w-full h-full object-cover rounded-lg"
+      />
     </div>
-  );
+    <div className="grid grid-rows-3 gap-2 h-full">
+      {images.slice(1, 4).map((img, index) => (
+        <div key={index} className="relative h-full">
+          <img
+            src={img}
+            alt={`Thumbnail ${index + 1}`}
+            className="w-full h-full object-cover rounded-lg"
+          />
+          {index === 2 && images.length > 4 && (
+            <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-lg">
+              <span className="text-white text-2xl">+{images.length - 4}</span>
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+);

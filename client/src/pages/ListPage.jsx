@@ -8,6 +8,7 @@ import { Map } from "../components/Map";
 import { usePosts } from "../hooks/usePosts";
 import { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import Footer from "../components/Footer";
 
 export const ListPage = () => {
     const { posts, loading } = usePosts();
@@ -83,6 +84,7 @@ export const ListPage = () => {
                     <Map items={posts}/>
                 </div>
             </div>
+            <Footer />
         </div>
     );
 }

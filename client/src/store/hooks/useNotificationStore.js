@@ -1,15 +1,26 @@
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil"
+import { useRecoilValue, useSetRecoilState } from "recoil"
 import { notificationAtom } from "../atoms/notification"
+import { useEffect, useState } from "react"
 
-export default function useNotificationStore(){
-    const [notification, setNotification] = useRecoilState(notificationAtom);
+export default function useNotificationStore() {
+    const recoilNotification = useRecoilValue(notificationAtom);
+    const setRecoilNotification = useSetRecoilState(notificationAtom);
+    const [notification, setNotification] = useState(0);
 
-    const decrease = async() =>{
-        setNotification((prev) => prev - 1);
+    useEffect(() => {
+        setNotification(recoilNotification ?? 0);
+    }, [recoilNotification]);
+
+    const decrease = () => {
+        setRecoilNotification((prev) => {
+            const newValue = Math.max(0, prev - 1);
+            setNotification(newValue);
+            return newValue;
+        });
     }
 
-    return{
-        notification, 
-        decrease                                                                                      
+    return {
+        notification,
+        decrease
     }
-} 
+}

@@ -6,6 +6,7 @@ import { AuthContext } from "../context/AuthContext"
 import { Navigate, useNavigate } from "react-router-dom"
 import UploadWidget from "../components/UploadImage";
 import axios from "axios"
+import Footer from "../components/Footer"
 
 export const UpdatePage = () => {
     const{ currentUser, updateUser } = useContext(AuthContext);
@@ -66,6 +67,7 @@ export const UpdatePage = () => {
                 </div>
                 <Button onClick={UpdateUser} label="Update Profile" className="mt-6 w-full"/>
             </div>
+            <Footer />
         </div>
     )
     

@@ -36,6 +36,7 @@ export default function PropertyCard({ item }) {
           <div className=" bg-navbar-color text-slate-800 max-w-max py-2 px-4 text-2xl font-normal rounded-lg">
             ${item.price}
           </div>
+          <div></div>
         </div>
       </div>
     </div>

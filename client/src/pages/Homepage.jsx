@@ -6,10 +6,10 @@ import { SelectFilter } from "../components/SelectFilter";
 import Button from "../components/Button";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Footer from "../components/Footer";
 
 export const Homepage = () => {
   const { currentUser } = useContext(AuthContext);
-  // console.log(currentUser);
 
   return (
     <div className="bg-background-color h-screen">
@@ -43,6 +43,7 @@ export const Homepage = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

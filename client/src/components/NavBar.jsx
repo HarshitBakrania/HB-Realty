@@ -6,16 +6,12 @@ import useNotificationStore from "../store/hooks/useNotificationStore";
 
 export default function NavBar() {
   const navigate = useNavigate();
-  // const { number, fetch } = useNotificationStore();
-  // console.log(number)
-  const { notification } = useNotificationStore();
   const { currentUser } = useContext(AuthContext);
+  const { notification } = useNotificationStore();
 
-  // useEffect(() => {
-  //   if(currentUser){
-  //     fetch();
-  //   }
-  // },[fetch]);
+  useEffect(() =>{
+    console.log("Current notification count: ", notification);
+  }, [notification])
 
   return (
     <div className="flex justify-between p-8 bg-navbar-color">
@@ -31,7 +27,7 @@ export default function NavBar() {
           {currentUser ? (
             <div className="flex space-x-2">
               <NavBarButtons
-                label={"Profile " + notification}
+                label={`Profile ${notification}`}
                 onClick={() => navigate("/user")}
               />
               <MessageIcon />

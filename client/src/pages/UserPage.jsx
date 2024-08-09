@@ -5,6 +5,7 @@ import { Navigate, useNavigate } from "react-router-dom"
 import axios from "axios"
 import NavBar from "../components/NavBar";
 import { useUserPosts } from "../hooks/useUserPosts";
+import Footer from "../components/Footer";
 
 export const UserPage = () =>{
     const { posts, loading} = useUserPosts();
@@ -64,7 +65,8 @@ export const UserPage = () =>{
                         </div>      
                     </div>
                 </div>         
-            </div>     
+            </div>
+            <Footer/>    
         </div>
     )
 }

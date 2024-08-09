@@ -8,6 +8,7 @@ import UploadWidget from "../components/UploadImage";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Footer from "../components/Footer";
 
 export const NewPostPage = () => {
     const[images, setImages] = useState([]);
@@ -120,7 +121,8 @@ export const NewPostPage = () => {
                     />      
                 </div>    
             </div>
-           </div>   
+           </div>
+           <Footer />
        </div>
     );
 }
