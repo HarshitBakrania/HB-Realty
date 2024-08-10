@@ -9,7 +9,7 @@ export default function Footer() {
   return (
     <div className="bg-gray-200">
       <div className="py-32 px-40 grid grid-cols-4 justify-center">
-        <div className="flex flex-col text-2xl space-y-4">
+        <div className="flex flex-col text-2xl space-y-4 pr-40">
           <div className="flex gap-3">
             <HomeIcon />
             <div>HB Realty</div>

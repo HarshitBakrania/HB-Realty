@@ -6,10 +6,13 @@ import axios from "axios"
 import NavBar from "../components/NavBar";
 import { useUserPosts } from "../hooks/useUserPosts";
 import Footer from "../components/Footer";
+import PropertyCard from "../components/PropertyCard";
 
 export const UserPage = () =>{
     const { posts, loading} = useUserPosts();
     console.log(posts)
+    const userPosts = posts.userPosts;
+    const savedPosts = posts.savedPosts;
     const {updateUser, currentUser} = useContext(AuthContext);
     const navigate = useNavigate();
 
@@ -32,7 +35,7 @@ export const UserPage = () =>{
     return(
         <div>
             <NavBar/>
-            <div className="text-white grid grid-cols-4 bg-background-color h-[100vh]">
+            <div className="text-white grid grid-cols-4 bg-background-color">
                 <div className="col-span-3">
                     <div className="py-16 px-20 flex justify-between">
                         <div className="text-3xl font-semibold">
@@ -42,7 +45,11 @@ export const UserPage = () =>{
                             navigate("/posts/create")
                         }}/>
                     </div>
-                    
+                    <div className="mx-24 mt-8 mb-36 space-y-12">
+                        {userPosts ? userPosts.map(item => (
+                            <PropertyCard key={item.id} item={item} />
+                        )) : null}
+                    </div>
                 </div> 
                 <div className="col-span-1 bg-secondary-color max-h-max p-6 space-y-5">
                     <div className="flex justify-between">

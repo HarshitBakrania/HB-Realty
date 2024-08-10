@@ -9,9 +9,9 @@ export default function NavBar() {
   const { currentUser } = useContext(AuthContext);
   const { notification } = useNotificationStore();
 
-  useEffect(() =>{
+  useEffect(() => {
     console.log("Current notification count: ", notification);
-  }, [notification])
+  }, [notification]);
 
   return (
     <div className="flex justify-between p-8 bg-navbar-color">
@@ -20,8 +20,16 @@ export default function NavBar() {
       </div>
       <div className="sm:pr-10 ">
         <div className="flex justify-end space-x-4 cursor-pointer flex-row">
-          <NavBarButtons label="Buy" />
-          <NavBarButtons label="Rent" />
+          <NavBarButtons
+            label="Buy"
+            onClick={() => {
+              navigate("/list?type=buy");
+            }}
+          />
+          <NavBarButtons
+            label="Rent"
+            onClick={() => navigate("/list?type=rent")}
+          />
           <NavBarButtons label="Contact" />
           <NavBarButtons label="About" />
           {currentUser ? (
@@ -33,10 +41,7 @@ export default function NavBar() {
               <MessageIcon />
             </div>
           ) : (
-            <NavBarButtons
-              label="Login"
-              onClick={() => navigate("/signin")}
-            />
+            <NavBarButtons label="Login" onClick={() => navigate("/signin")} />
           )}
         </div>
       </div>

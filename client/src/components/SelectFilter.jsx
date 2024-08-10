@@ -4,7 +4,7 @@ export const SelectFilter = ({ label, name, options, className, onChange, value 
             <label className="mb-1">{label}</label>
             <select 
                 name={name} 
-                className={`text-black rounded-md ${className}`}
+                className={`text-black rounded-sm ${className}`}
                 onChange={onChange}
                 value={value}
             >
