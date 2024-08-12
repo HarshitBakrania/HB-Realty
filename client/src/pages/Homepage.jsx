@@ -32,7 +32,7 @@ export const Homepage = () => {
                 <div>500+ Properties Sold</div>
                 <div>98% Customer Satisfaction</div>
               </div>
-              <div className="space-y-14">
+              <div className="space-y-14 pl-20">
                 <div>$1B+ Sales</div>
                 <div>15+ Years in Business</div>
               </div>

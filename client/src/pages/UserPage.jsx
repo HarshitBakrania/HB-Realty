@@ -37,18 +37,26 @@ export const UserPage = () =>{
             <NavBar/>
             <div className="text-white grid grid-cols-4 bg-background-color">
                 <div className="col-span-3">
-                    <div className="py-16 px-20 flex justify-between">
-                        <div className="text-3xl font-semibold">
+                    <div className="py-16 px-24 flex justify-between">
+                        <div className="text-4xl font-semibold">
                             Your Listings
                         </div>
                         <Button label="Create New Listing" className="text-lg" onClick={() =>{
                             navigate("/posts/create")
                         }}/>
                     </div>
-                    <div className="mx-24 mt-8 mb-36 space-y-12">
+                    <div className="mx-24 mt-8 mb-28 space-y-12">
                         {userPosts ? userPosts.map(item => (
                             <PropertyCard key={item.id} item={item} />
                         )) : null}
+                    </div>
+                    <div className="text-4xl font-semibold mx-24 pb-6 pt-12 border-t border-slate-800">
+                        Saved Posts
+                    </div>
+                    <div className="mx-24 mt-8 mb-36 space-y-12">
+                        {savedPosts ? savedPosts.map(item => (
+                            <PropertyCard key={item.id} item={item} />
+                        )): null}
                     </div>
                 </div> 
                 <div className="col-span-1 bg-secondary-color max-h-max p-6 space-y-5">
@@ -58,18 +66,18 @@ export const UserPage = () =>{
                         </div>
                         <Button label="Update Profile" onClick={() => navigate("/user/update")} />
                     </div>
-                    <div className="space-y-4">
-                        <div className="text-lg font-semibold flex">
+                    <div className="text-xl font-semibold">
+                        <div className="flex">
                             <div className="py-6">Avatar: </div>
                             {currentUser.avatar ? <img src ={currentUser.avatar} className="rounded-full size-20 ml-4" /> : null}
                         </div>
-                        <div className="text-lg font-semibold">
+                        <div className="pt-4">
                             Username: {currentUser.username}
                         </div>
-                        <div className="text-lg font-semibold">
+                        <div className="py-6">
                             Email Address: {currentUser.email}
                         </div>
-                        <div className="max-w-24 pt-2">
+                        <div className="max-w-24 pt-2 font-normal">
                             <Button label="Logout" onClick={LogoutUser} />
                         </div>      
                     </div>

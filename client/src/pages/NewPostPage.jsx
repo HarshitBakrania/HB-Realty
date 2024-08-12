@@ -76,7 +76,7 @@ export const NewPostPage = () => {
                     <InputBox label="Total Size" type="number" name="size" />
                     <InputBox label="Latitude" type="text" name="latitude" />
                     <InputBox label="Longitude" type="text" name="longitude" />
-                    <InputBox label="Schools Nearby" type="number" name="school" />
+                    <InputBox label="School Distance (meters)" type="number" name="school" />
                     <div className="flex justify-between py-4">
                         <SelectFilter label="Type" name="type" options={["Buy", "Rent"]} />
                         <SelectFilter label="Property" name="property" options={["Apartment", "House", "Land"]} />
@@ -85,8 +85,8 @@ export const NewPostPage = () => {
                         <SelectFilter label="Furnished" name="furnished" options={["Yes", "No"]} />
                         <SelectFilter label="Pets" name="pet" options={["Allowed", "Not Allowed"]} />
                     </div>
-                    <InputBox label="Hospitals Nearby" type="number" name="hospital" />
-                    <InputBox label="Restaurants Nearby" type="number" name="restaurant" /> 
+                    <InputBox label="Hospital Distance (meters)" type="number" name="hospital" />
+                    <InputBox label="Restaurant Distance (meters)" type="number" name="restaurant" /> 
                     <div className="col-span-3">
                         <div className="py-10 text-white space-y-2 ">
                             <div className="text-2xl">
