@@ -1,11 +1,11 @@
 import express from "express"
 import cors from "cors"
-import authRoute from "./routes/auth.js"
+import authRoute from "../routes/auth.js"
 import cookieParser from "cookie-parser";
-import userRoute from "./routes/user.js"
-import postRoute from "./routes/post.js"
-import chatRoute from "./routes/chat.js"
-import messageRoute from "./routes/message.js"
+import userRoute from "../routes/user.js"
+import postRoute from "../routes/post.js"
+import chatRoute from "../routes/chat.js"
+import messageRoute from "../routes/message.js"
 
 const PORT = 3000;
 

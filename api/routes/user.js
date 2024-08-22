@@ -1,5 +1,5 @@
 import express from "express";
-import { authMiddleware } from "../middleware.js";
+import { authMiddleware } from "../middlewares/middleware.js";
 import prisma from "../lib/prisma.js";
 import bcrypt from "bcrypt";
 
