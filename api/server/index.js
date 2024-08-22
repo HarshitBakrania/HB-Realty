@@ -1,5 +1,6 @@
 import express from "express"
 import cors from "cors"
+import bodyParser from "body-parser";
 import authRoute from "../routes/auth.js"
 import cookieParser from "cookie-parser";
 import userRoute from "../routes/user.js"
@@ -15,7 +16,7 @@ app.use(cors({
     origin: process.env.CLIENT_URL,
     credentials: true
 }));
-app.use(express.json());
+app.use(bodyParser.json());
 app.use(cookieParser());
 
 app.get("/", (req, res) => {
