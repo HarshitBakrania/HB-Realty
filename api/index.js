@@ -28,8 +28,8 @@ app.use("/api/posts", postRoute);
 app.use("/api/chats", chatRoute);
 app.use("/api/messages", messageRoute);
 
+export default app;
 
-
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`)
-})
+// app.listen(PORT, () => {
+//     console.log(`Server running on port ${PORT}`)
+// })
