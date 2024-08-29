@@ -7,8 +7,6 @@ import postRoute from "./routes/post.js"
 import chatRoute from "./routes/chat.js"
 import messageRoute from "./routes/message.js"
 
-const PORT = 3000;
-
 const app = express();
 
 app.use(cors({
@@ -29,7 +27,3 @@ app.use("/api/chats", chatRoute);
 app.use("/api/messages", messageRoute);
 
 export default app;
-
-// app.listen(PORT, () => {
-//     console.log(`Server running on port ${PORT}`)
-// })
