@@ -153,3 +153,34 @@ export function Bookmark(){
   <path strokeLinecap="round" strokeLinejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" />
 </svg>
 }
+
+export const NavBarButtons = ({ label, onClick }) => {
+  return (
+    <div onClick={onClick} className="no-underline hover:underline text-lg">
+      {label}
+    </div>
+  );
+};
+
+export const MessageIcon = ({ notificationCount }) => {
+  return (
+      <button
+        type="button"
+        className="relative inline-flex items-center text-sm font-medium text-center text-white"
+      >
+        <svg
+          className="w-6 h-6 hover:fill-slate-900"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="#666666"
+          viewBox="0 0 20 16"
+        >
+          <path d="m10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z" />
+          <path d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z" />
+        </svg>
+        <div className="absolute inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">
+          {notificationCount}
+        </div>
+      </button>
+  );
+};
