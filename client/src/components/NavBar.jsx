@@ -18,8 +18,8 @@ export default function NavBar() {
       <div className="sm:pl-20" onClick={() => navigate("/")}>
         <HomeIcon />
       </div>
-      <div className="sm:pr-10 ">
-        <div className="flex justify-end space-x-4 cursor-pointer flex-row">
+      <div className="sm:pr-14">
+        <div className="flex justify-end space-x-5 cursor-pointer flex-row">
           <NavBarButtons
             label="Buy"
             onClick={() => {
@@ -33,12 +33,14 @@ export default function NavBar() {
           <NavBarButtons label="Contact" />
           <NavBarButtons label="About" />
           {currentUser ? (
-            <div className="flex space-x-2">
+            <div className="flex space-x-5">
               <NavBarButtons
-                label={`Profile ${notification}`}
+                label={"Profile"}
                 onClick={() => navigate("/user")}
               />
-              <MessageIcon />
+              <div>
+                <MessageIcon notificationCount={notification} />
+              </div>
             </div>
           ) : (
             <NavBarButtons label="Login" onClick={() => navigate("/signin")} />
@@ -57,24 +59,28 @@ const NavBarButtons = ({ label, onClick }) => {
   );
 };
 
-const MessageIcon = () => {
+const MessageIcon = ({ notificationCount }) => {
   const navigate = useNavigate();
   return (
     <div onClick={() => navigate("/user/messages")}>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth="1.5"
-        stroke="currentColor"
-        className="size-6"
+      <button
+        type="button"
+        className="relative inline-flex items-center text-sm font-medium text-center text-white"
       >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
-        />
-      </svg>
+        <svg
+          className="w-6 h-6 hover:fill-slate-900"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="#666666"
+          viewBox="0 0 20 16"
+        >
+          <path d="m10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z" />
+          <path d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z" />
+        </svg>
+        <div className="absolute inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">
+          {notificationCount}
+        </div>
+      </button>
     </div>
   );
 };
