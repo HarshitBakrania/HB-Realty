@@ -20,7 +20,7 @@ export const UserPage = () =>{
     }
     async function LogoutUser(){
         try{
-            const response = await axios.post("http://localhost:3000/api/auth/logout",{
+            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/auth/logout`,{
             },{
                 withCredentials: true
             });
