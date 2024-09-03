@@ -22,7 +22,7 @@ export const NewPostPage = () => {
         console.log(inputs)
 
         try{
-            const response = await axios.post("http://localhost:3000/api/posts",{
+            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/posts`,{
                 postData: {
                     title: inputs.title,
                     price: parseInt(inputs.price),

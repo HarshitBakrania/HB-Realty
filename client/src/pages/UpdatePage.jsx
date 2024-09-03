@@ -23,7 +23,7 @@ export const UpdatePage = () => {
   async function UpdateUser() {
     try {
       const response = await axios.put(
-        `http://localhost:3000/api/users/${currentUser.id}`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/users/${currentUser.id}`,
         {
           username,
           email,

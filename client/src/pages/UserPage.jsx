@@ -10,7 +10,6 @@ import PropertyCard from "../components/PropertyCard";
 
 export const UserPage = () =>{
     const { posts, loading} = useUserPosts();
-    console.log(posts)
     const userPosts = posts.userPosts;
     const savedPosts = posts.savedPosts;
     const {updateUser, currentUser} = useContext(AuthContext);

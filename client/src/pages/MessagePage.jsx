@@ -31,7 +31,7 @@ export const MessagePage = () => {
       if (chat && chat.length > 0) {
         try {
           const response = await axios.get(
-            `http://localhost:3000/api/chats/${chat[0].id}`,
+            `${import.meta.env.VITE_BACKEND_URL}/api/chats/${chat[0].id}`,
             {
               withCredentials: true,
             }

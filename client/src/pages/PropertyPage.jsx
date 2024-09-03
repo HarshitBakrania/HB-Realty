@@ -34,7 +34,7 @@ export const PropertyPage = () => {
     }
     try {
       await axios.post(
-        "http://localhost:3000/api/users/save",
+        `${import.meta.env.VITE_BACKEND_URL}/api/users/save`,
         { postId: post.id },
         {
           withCredentials: true,
