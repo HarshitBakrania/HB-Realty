@@ -58,7 +58,7 @@ export const UserPage = () =>{
                         )): null}
                     </div>
                 </div> 
-                <div className="col-span-1 bg-secondary-color max-h-max p-6 space-y-5">
+                <div className="col-span-1 bg-secondary-color max-h-max p-10 space-y-5 m-10">
                     <div className="flex justify-between">
                         <div className="text-3xl font-bold">
                             Account Information
