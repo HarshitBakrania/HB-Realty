@@ -24,6 +24,7 @@ export const SignInPage = () => {
 
     async function LoginUser(){
         try{
+            console.log(import.meta.env.VITE_BACKEND_URL)
             const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/auth/login`,{
                 username,
                 password
