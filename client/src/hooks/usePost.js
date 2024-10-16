@@ -6,7 +6,7 @@ export const usePost = ({id}) => {
     const [post, setPost] = useState("");
 
     useEffect(() =>{
-        axios.get(`http://localhost:3000/api/posts/${id}`,{
+        axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/posts/${id}`,{
             withCredentials: true
         }) 
         .then((res) => {

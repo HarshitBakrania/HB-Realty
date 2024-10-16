@@ -8,7 +8,7 @@ export const useUserPosts = () =>{
     useEffect(() =>{
         const fetchPosts = async () =>{
             try{
-                const response = await axios.get("http://localhost:3000/api/users/userPosts",{
+                const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/users/userPosts`,{
                     withCredentials: true
                 })
                 setPosts(response.data);

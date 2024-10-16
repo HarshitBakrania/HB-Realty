@@ -48,7 +48,7 @@ export const MessagePage = () => {
   useEffect(() => {
     const readMessage = async () => {
       try {
-        await axios.put(`http://localhost:3000/api/chats/read/${messages.id}`, {
+        await axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/chats/read/${messages.id}`, {
           withCredentials: true,
         });
       } catch (error) {
@@ -76,7 +76,7 @@ export const MessagePage = () => {
   const openChat = async (id, receiver) => {
     try {
       const response = await axios.get(
-        `http://localhost:3000/api/chats/${id}`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/chats/${id}`,
         {
           withCredentials: true,
         }
@@ -92,7 +92,7 @@ export const MessagePage = () => {
     if (!text) return;
     try {
       const response = await axios.post(
-        `http://localhost:3000/api/messages/${messages.id}`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/messages/${messages.id}`,
         {
           text,
         },
