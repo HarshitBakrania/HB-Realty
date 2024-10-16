@@ -5,7 +5,6 @@ import NavBar from "../components/NavBar"
 import { useContext, useEffect, useState } from "react"
 import { AuthContext } from "../context/AuthContext"
 import axios from "axios"
-import { useCookies } from "react-cookie";
 import Footer from "../components/Footer"
 
 export const SignInPage = () => {

@@ -11,7 +11,7 @@ export const notificationAtom = atom({
       const { currentUser } = useContext(AuthContext);
       if (currentUser) {
         const res = await axios.get(
-          "http://localhost:3000/api/users/notification",
+          `${import.meta.env.VITE_BACKEND_URL}/api/users/notification`,
           {
             withCredentials: true,
           }
