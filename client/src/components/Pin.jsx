@@ -5,10 +5,9 @@ export default function Pin({item}){
     return(
         <Marker position={[item.latitude, item.longitude]}>
             <Popup>
-                <img src={item.img} className="w-auto h-auto"></img>
                 <div>
-                    <Link to={`/${item.id}`}>{item.title}</Link>
-                    <span>{item.bedroom} bedroom</span>
+                    <Link to={`/posts/${item.id}`}>{item.title}</Link>
+                    <div>{item.bedroom} bedroom</div>
                     <b>${item.price}</b>
                 </div>
             </Popup>

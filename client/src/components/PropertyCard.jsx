@@ -7,7 +7,7 @@ export default function PropertyCard({ item }) {
   return (
     <div className="grid grid-cols-5 bg-secondary-color rounded-2xl border border-neutral-800">
       <div className="col-span-3 rounded-lg overflow-hidden w-full aspect-video">
-        <img src={item.images} className="w-full h-full object-cover" alt={item.title} />
+        <img src={item.images[0]} className="w-full h-full object-cover" alt={item.title} />
       </div>
 
       <div className="col-span-2 p-3 hover:cursor-pointer flex flex-col justify-between h-full">
