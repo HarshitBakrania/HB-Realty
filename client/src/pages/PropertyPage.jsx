@@ -76,8 +76,8 @@ export const PropertyPage = () => {
               </div>
             </div>
             <div className="col-span-1 mt-10 px-4">
-              <div className="font-semibold text-2xl text-center">Owner Details</div>
-              <div className="mt-3 flex items-center mx-20">
+              <div className="font-semibold text-2xl">Owner Details</div>
+              <div className="mt-3 p-5 flex items-center bg-secondary-color rounded-lg">
                 <div className="font-bold text-2xl">{post.user.username}</div>
                 <img
                   src={post.user.avatar}
