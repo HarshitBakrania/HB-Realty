@@ -17,7 +17,7 @@ router.get("/", async (req, res) => {
         bedroom: parseInt(query.bedroom) || undefined,
         price: {
           gte: parseInt(query.minPrice) || 0,
-          lte: parseInt(query.maxPrice) || 10000000,
+          lte: parseInt(query.maxPrice) || 1000000000,
         },
       },
     });
