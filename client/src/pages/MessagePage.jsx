@@ -48,7 +48,7 @@ export const MessagePage = () => {
   useEffect(() => {
     const readMessage = async () => {
       try {
-        await axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/chats/read/${messages.id}`, {
+        await axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/chats/read/${messages.id}`, {}, {
           withCredentials: true,
         });
       } catch (error) {
@@ -82,7 +82,7 @@ export const MessagePage = () => {
         }
       );
       decrease();
-      setMessages({ ...response.data, receiver });x
+      setMessages({ ...response.data, receiver });
     } catch (err) {
       console.log(err);
     }

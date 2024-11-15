@@ -1,5 +1,6 @@
 import Button from "../components/Button";
 import NavBar from "../components/NavBar";
+import Bed from "../assets/bed.svg";
 import { useNavigate, useParams } from "react-router-dom";
 import { usePost } from "../hooks/usePost";
 import DOMPurify from "dompurify";
@@ -11,6 +12,11 @@ import TextIcon, {
   MapPin,
   CheckCircle,
   Bookmark,
+  BathroomIcon,
+  RulerIcon,
+  SchoolIcon,
+  HospitalIcon,
+  RestaurantIcon,
 } from "../components/icons/icons";
 import Footer from "../components/Footer";
 
@@ -101,14 +107,67 @@ export const PropertyPage = () => {
               </div>
             </div>
           </div>
-          <div className="py-10 text-2xl font-semibold">
-            Features
-            <div className="bg-secondary-color text-xl p-5 space-y-6 rounded-xl mt-2">
-              <div>{post.postDetail.size}sq feet</div>
-              <div>{post.bedroom} Bedrooms</div>
-              <div>{post.bathroom} Bathrooms</div>
+          <div className="flex justify-between">
+            <div className="py-10 text-2xl font-semibold max-w-fit">
+              Features
+              <div className="bg-secondary-color text-xl py-6 px-8 space-y-6 rounded-xl mt-2">
+                <div className="flex space-x-3">
+                  <RulerIcon />
+                  <div>{post.postDetail.size}sq feet</div>
+                </div>
+                <div className="flex space-x-3">
+                  <img src={Bed} className="size-7" alt="Bedroom" />
+                  <div>{post.bedroom} Bedrooms</div>
+                </div>
+                <div className="flex space-x-3">
+                  <BathroomIcon />
+                  <div>{post.bathroom} Bathrooms</div>
+                </div>
+              </div>
+            </div>
+            <div className="text-2xl font-semibold py-10">
+              Nearby Places
+              <div className="bg-secondary-color text-xl py-5 px-8 mt-2 rounded-lg max-w-fit space-y-2">
+                <div className="flex items-center">
+                  <SchoolIcon />
+                  <div className="pl-3">
+                    <div>School</div>
+                    <div className="text-xs font-thin">
+                      {post.postDetail.school > 999
+                        ? post.postDetail.school / 1000 + "km"
+                        : post.postDetail.school + "m"}{" "}
+                      away
+                    </div>
+                  </div>
+                </div>
+                <div className="flex items-center">
+                  <HospitalIcon />
+                  <div className="pl-3">
+                    <div>Hospitals</div>
+                    <div className="text-xs font-thin">
+                      {post.postDetail.hospital > 999
+                        ? post.postDetail.hospital / 1000 + "km"
+                        : post.postDetail.hospital + "m"}{" "}
+                      away
+                    </div>
+                  </div>
+                </div>
+                <div className="flex items-center">
+                  <RestaurantIcon />
+                  <div className="pl-3">
+                    <div>Restaurants</div>
+                    <div className="text-xs font-thin">
+                      {post.postDetail.restaurant > 999
+                        ? post.postDetail.restaurant / 1000 + "km"
+                        : post.postDetail.restaurant + "m"}{" "}
+                      away
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
+
           <div className="h-96">
             <div className="text-2xl font-semibold">Location</div>
             <Map items={[post]} />
@@ -135,38 +194,6 @@ export const PropertyPage = () => {
                 <Button label="Send a message">
                   <TextIcon />
                 </Button>
-              </div>
-            </div>
-          </div>
-          <div className="text-2xl font-semibold py-10">
-            Nearby Places
-            <div className="bg-secondary-color text-xl grid grid-cols-3 p-5 mt-2 rounded-lg">
-              <div className="col-span-1">
-                <div>School</div>
-                <div className="text-xs font-thin">
-                  {post.postDetail.school > 999
-                    ? post.postDetail.school / 1000 + "km"
-                    : post.postDetail.school + "m"}{" "}
-                  away
-                </div>
-              </div>
-              <div className="col-span-1">
-                <div>Hospitals</div>
-                <div className="text-xs font-thin">
-                  {post.postDetail.hospital > 999
-                    ? post.postDetail.hospital / 1000 + "km"
-                    : post.postDetail.hospital + "m"}{" "}
-                  away
-                </div>
-              </div>
-              <div className="col-span-1">
-                <div>Restaurants</div>
-                <div className="text-xs font-thin">
-                  {post.postDetail.restaurant > 999
-                    ? post.postDetail.restaurant / 1000 + "km"
-                    : post.postDetail.restaurant + "m"}{" "}
-                  away
-                </div>
               </div>
             </div>
           </div>
