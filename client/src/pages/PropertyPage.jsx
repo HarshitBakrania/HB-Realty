@@ -30,6 +30,8 @@ export const PropertyPage = () => {
   useEffect(() => {
     if (!loading && post) {
       setSaved(post.isSaved || false);
+    } else if (!currentUser) {
+      navigate("/signin");
     }
   }, [loading, post]);
 
@@ -57,6 +59,20 @@ export const PropertyPage = () => {
   const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
+
+  async function sendMessage () {
+    try{
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/chats`,{
+        userIdToken: currentUser.id,
+        receiverId: post.userId
+      },{
+        withCredentials: true
+      })
+      navigate(`/user/messages`)
+    }catch(error){
+      console.log(error)
+    }
+  }
 
   return (
     <div>
@@ -191,7 +207,7 @@ export const PropertyPage = () => {
                 />
               </div>
               <div className="flex mt-6">
-                <Button label="Send a message">
+                <Button label="Send a message" onClick={sendMessage}>
                   <TextIcon />
                 </Button>
               </div>

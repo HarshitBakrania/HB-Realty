@@ -26,24 +26,6 @@ export const MessagePage = () => {
     messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  useEffect(() => {
-    const lastChat = async () => {
-      if (chat && chat.length > 0) {
-        try {
-          const response = await axios.get(
-            `${import.meta.env.VITE_BACKEND_URL}/api/chats/${chat[0].id}`,
-            {
-              withCredentials: true,
-            }
-          );
-          setMessages({ ...response.data, receiver: chat[0].receiver });
-        } catch (error) {
-          console.log(error);
-        }
-      }
-    };
-    lastChat();
-  }, [chat]);
 
   useEffect(() => {
     const readMessage = async () => {
@@ -140,6 +122,7 @@ export const MessagePage = () => {
               return (
                 <MessageCard
                   name={c.receiver.username}
+                  avatar={c.receiver.avatar}
                   message={c.lastMessage}
                   onClick={() => openChat(c.id, c.receiver)}
                   key={c.id}
@@ -157,10 +140,9 @@ export const MessagePage = () => {
         {messages && (
           <div className="flex-1 flex flex-col">
             <div className="text-lg p-4 border-b border-slate-600 flex items-center gap-2">
-              <ProfileIcon size={50} />
+              {messages.receiver.avatar ? <img src={messages.receiver.avatar} className="rounded-full size-12" /> : <ProfileIcon size={50} />}
               <div className="flex flex-col">
-                <div>{messages.receiver.username}</div>
-                <div className="text-sm text-slate-500">Online</div>
+                <div className="font-semibold text-xl pl-2">{messages.receiver.username}</div>
               </div>
             </div>
 

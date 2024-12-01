@@ -2,9 +2,10 @@ import { Link, useNavigate } from "react-router-dom"
 import Button from "../components/Button"
 import { InputBox } from "../components/InputBox"
 import NavBar from "../components/NavBar"
-import { useState } from "react"
+import { useContext, useState } from "react"
 import axios from "axios"
 import Footer from "../components/Footer"
+import { AuthContext } from "../context/AuthContext"
 
 export const SignUpPage = () => {
     const[username, setUsername] = useState("");
@@ -12,6 +13,7 @@ export const SignUpPage = () => {
     const[password, setPassword] = useState("");
     const[error, setError] = useState("");
     const navigate = useNavigate();
+    const { updateUser } = useContext(AuthContext)
     
     async function RegisterUser(){
         try{
@@ -20,8 +22,13 @@ export const SignUpPage = () => {
                 email,
                 password
             })
-            navigate("/")
-            console.log(response.data)
+            console.log(response.data);
+            const login = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/auth/login`,{
+                username,
+                password
+            },{ withCredentials: true });
+            updateUser(login.data);
+            navigate("/");
         }catch(error){
             setError(error.response.data.message);
             console.log(error.response.data.message);

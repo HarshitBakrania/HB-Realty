@@ -23,8 +23,8 @@ export default function PropertyCard({ item }) {
         </div>
         
         <div className="flex items-center text-neutral-400 text-lg">
-          <MapPin />
-          <span className="ml-2">{item.address}</span>
+          <div><MapPin /></div>
+          <div className="ml-2">{item.address}</div>
         </div>
         
         <div className="flex items-center text-neutral-300">
