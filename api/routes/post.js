@@ -66,6 +66,8 @@ router.get("/:id", async (req, res) => {
           res.status(200).json({ ...post, isSaved: saved ? true : false });
         }
       });
+    }else if(!token){
+      res.status(200).json({message: "Unauthorized", isSaved: false});
     }
   } catch (error) {
     console.log(error);
