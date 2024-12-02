@@ -23,7 +23,7 @@ export default function Footer() {
             <div>info@hbrealty.com</div>
           </div>
           <div className="flex gap-3">
-            <MapPin />
+            <div><MapPin /></div>
             <div>123 Main St, San Francisco, CA 94105</div>
           </div>
         </div>

@@ -12,7 +12,7 @@ export const Homepage = () => {
   const { currentUser } = useContext(AuthContext);
 
   return (
-    <div className="bg-background-color h-screen">
+    <div className="bg-background-color">
       <NavBar />
       <div className="p-40">
         <div className="grid grid-cols-2">
