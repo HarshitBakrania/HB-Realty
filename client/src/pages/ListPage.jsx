@@ -24,9 +24,13 @@ export const ListPage = () => {
         return <div>loading...</div>
     }
 
+    const capitalizeWords = (str) =>{
+        return str.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
+    }
+
     const handleFilter = () => {
         const params = new URLSearchParams();
-        if(city) params.append("city", city.toLowerCase());
+        if(city) params.append("city", capitalizeWords(city));
         if(type && type !== "Any") params.append("type", type.toLowerCase());
         if(property && property !== "Any") params.append("property", property.toLowerCase());
         if(minPrice) params.append("minPrice", minPrice);

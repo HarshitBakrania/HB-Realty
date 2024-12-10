@@ -55,10 +55,14 @@ function SearchFilters() {
   const [type, setType] = useState("");
   const navigate = useNavigate();
 
+  const capitalizeWords = (str) =>{
+    return str.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
+}
+
   const GetProperties = async () => {
     try {
       const params = new URLSearchParams();
-      if (city) params.append("city", city.toLowerCase());
+      if (city) params.append("city", capitalizeWords(city));
       if (minPrice) params.append("minPrice", minPrice);
       if (maxPrice) params.append("maxPrice", maxPrice);
       if (type && type !== "Any") params.append("type", type.toLowerCase());

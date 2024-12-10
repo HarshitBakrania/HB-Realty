@@ -8,7 +8,6 @@ import { UserPage } from "./pages/UserPage";
 import { MessagePage } from "./pages/MessagePage";
 import { UpdatePage } from "./pages/UpdatePage";
 import { NewPostPage } from "./pages/NewPostPage";
-import Footer from "./components/Footer";
 
 function App() {
   return (
