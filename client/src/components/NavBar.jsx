@@ -1,7 +1,8 @@
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { HomeIcon, NavBarButtons, MessageIcon } from "./icons/icons";
+import { NavBarButtons, MessageIcon } from "./icons/icons";
+import logo from "../../public/HB-Realty.jpg";
 import useNotificationStore from "../store/hooks/useNotificationStore";
 
 export default function NavBar() {
@@ -14,11 +15,11 @@ export default function NavBar() {
   }, [notification]);
 
   return (
-    <div className="flex justify-between p-8 bg-navbar-color">
-      <div className="sm:pl-20" onClick={() => navigate("/")}>
-        <HomeIcon />
+    <div className="flex justify-between px-32 py-6 bg-navbar-color items-center">
+      <div>
+        <img src={logo} className="w-12 h-12 hover:cursor-pointer rounded-sm" onClick={() => navigate("/")}/>
       </div>
-      <div className="sm:pr-14">
+      <div>
         <div className="flex justify-end space-x-5 cursor-pointer flex-row">
           <NavBarButtons
             label="Buy"

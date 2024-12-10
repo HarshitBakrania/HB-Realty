@@ -19,7 +19,7 @@ export default function Footer() {
             <div>+1(555) 555-555 </div>
           </div>
           <div className="flex gap-3">
-            <MailIcon />
+            <div><MailIcon /></div>
             <div>info@hbrealty.com</div>
           </div>
           <div className="flex gap-3">
