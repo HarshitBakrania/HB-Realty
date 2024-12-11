@@ -81,6 +81,7 @@ Follow these steps to run the project locally:
      DATABASE_URL="yourdatabaseurl"
      JWT_SECRET=yourjwtsecret
      CLIENT_URL="http://localhost:5173"
+     NODE_ENV=development
      ```
 
 ### 4. 🚀 Run the development servers:
