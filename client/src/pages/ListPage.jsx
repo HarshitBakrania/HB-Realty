@@ -1,7 +1,6 @@
 import { InputBox } from "../components/InputBox";
 import NavBar from "../components/NavBar";
 import Button from "../components/Button";
-import { listData } from "../lib/testData";
 import PropertyCard from "../components/PropertyCard";
 import { SelectFilter } from "../components/SelectFilter";
 import { Map } from "../components/Map";

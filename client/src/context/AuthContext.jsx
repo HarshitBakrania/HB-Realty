@@ -3,17 +3,36 @@ import { createContext, useEffect, useState } from "react";
 export const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
-    const[currentUser, setCurrentUser] = useState(
-        JSON.parse(localStorage.getItem("user")) || null
-    )
+    const[currentUser, setCurrentUser] = useState(() =>{
+        const storedData = JSON.parse(localStorage.getItem("user"));
+        const sevenDays = 1000 * 60 * 60 * 24 * 7;
+
+        if(storedData && new Date().getTime() - storedData.timeStamp < sevenDays){
+            return storedData.user;
+        }else{
+            localStorage.removeItem("user");
+            return null;
+        }
+    });
     
     const updateUser = (data) =>{
         setCurrentUser(data)
     };
 
-    useEffect(() => {
-        localStorage.setItem("user", JSON.stringify(currentUser))
-    }, [currentUser]);
+    const logout = () =>{
+        setCurrentUser(null);
+        localStorage.removeItem("user");
+    }
 
-    return <AuthContext.Provider value={{ currentUser,updateUser }}>{children}</AuthContext.Provider>;
+    useEffect(() => {
+        if (currentUser) {
+          const userWithTimestamp = {
+            user: currentUser,
+            timestamp: new Date().getTime()
+          };
+          localStorage.setItem("user", JSON.stringify(userWithTimestamp));
+        }
+      }, [currentUser]);
+
+    return <AuthContext.Provider value={{ currentUser,updateUser, logout }}>{children}</AuthContext.Provider>;
 }

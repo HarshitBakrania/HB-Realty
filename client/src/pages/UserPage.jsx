@@ -12,7 +12,7 @@ export const UserPage = () =>{
     const { posts, loading} = useUserPosts();
     const userPosts = posts.userPosts;
     const savedPosts = posts.savedPosts;
-    const {updateUser, currentUser} = useContext(AuthContext);
+    const {updateUser, currentUser, logout} = useContext(AuthContext);
     const navigate = useNavigate();
 
     if(!currentUser){
@@ -24,7 +24,7 @@ export const UserPage = () =>{
             },{
                 withCredentials: true
             });
-            updateUser(null);
+            logout();
             navigate("/")
         }catch(error){
             console.log(error)
