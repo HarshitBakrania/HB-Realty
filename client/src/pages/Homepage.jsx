@@ -12,34 +12,43 @@ export const Homepage = () => {
   const { currentUser } = useContext(AuthContext);
 
   return (
-    <div className="bg-background-color">
+    <div className="bg-background-color max-w-full">
       <NavBar />
-      <div className="p-40">
-        <div className="grid grid-cols-2">
-          <div className="pr-10 pt-16 space-y-5">
-            <div className="text-white text-7xl font-bold">
-              Find Your Dream Home
+      <div className="px-10 py-12 md:px-20 md:py-16 lg:px-36 lg:py-32">
+        <div className="lg:grid lg:grid-cols-2 lg:gap-8 lg:gap-x-14">
+          <div className="space-y-8 md:space-y-12 lg:space-y-20">
+            <div>
+              <div className="text-white text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight">
+                Find Your Dream Home
+              </div>
+              <div className="text-white text-base md:text-xl lg:text-2xl mt-5">
+                Discover the perfect property for you with our comprehensive
+                real estate services.
+              </div>
             </div>
-            <div className="text-white text-xl">
-              Discover the perfect property for you with our comprehensive real
-              estate services.
+            <div className="block lg:hidden">
+              <img
+                className="rounded-md"
+                src="https://photos.zillowstatic.com/fp/566829ef38b8818eca4e21005f205e8c-cc_ft_960.jpg"
+                alt="Dream Home"
+              />
             </div>
             <div>
               <SearchFilters />
             </div>
-            <div className="text-white grid grid-cols-2 font-semibold text-3xl py-16">
-              <div className="space-y-14">
-                <div>500+ Properties Sold</div>
-                <div>98% Customer Satisfaction</div>
-              </div>
-              <div className="space-y-14 pl-20">
-                <div>$1B+ Sales</div>
-                <div>15+ Years in Business</div>
-              </div>
+            <div className="text-white grid grid-cols-2 font-bold tracking-tighter text-xl md:text-2xl lg:text-3xl py-5 px-5 gap-16">
+              <div>500+ Properties Sold</div>
+              <div>$1B+ Sales</div>
+              <div>15+ Years in Business</div>
+              <div className="">98% Customer Satisfaction</div>
             </div>
           </div>
-          <div>
-            <img src="https://photos.zillowstatic.com/fp/566829ef38b8818eca4e21005f205e8c-cc_ft_960.jpg" />
+          <div className="hidden lg:block">
+            <img
+              className="rounded-md"
+              src="https://photos.zillowstatic.com/fp/566829ef38b8818eca4e21005f205e8c-cc_ft_960.jpg"
+              alt="Dream Home"
+            />
           </div>
         </div>
       </div>
@@ -55,9 +64,12 @@ function SearchFilters() {
   const [type, setType] = useState("");
   const navigate = useNavigate();
 
-  const capitalizeWords = (str) =>{
-    return str.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
-}
+  const capitalizeWords = (str) => {
+    return str
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+  };
 
   const GetProperties = async () => {
     try {
@@ -73,12 +85,12 @@ function SearchFilters() {
   };
 
   return (
-    <div className="bg-secondary-color p-10 rounded-lg">
-      <div className="text-white text-3xl font-medium mb-4 italic">
+    <div className="bg-secondary-color p-5 rounded-lg mt-12">
+      <div className="text-white text-2xl md:text-3xl lg:text-4xl font-medium mb-4 italic">
         Your perfect property awaits!
       </div>
-      <div className="p-4 rounded-lg text-white">
-        <div className="grid grid-cols-4 gap-4">
+      <div className="rounded-lg text-white">
+        <div className="grid grid-cols-2 gap-5">
           <InputBox
             onChange={(e) => {
               setCity(e.target.value);
@@ -114,7 +126,7 @@ function SearchFilters() {
             label="Buy or Rent"
             name="type"
             options={["Any", "Buy", "Rent"]}
-            className="w-full space-y-4 p-2.5 text-slate-500 rounded-lg"
+            className="w-full space-y-4 p-2.5 text-slate-500 rounded-xl"
           />
         </div>
         <Button

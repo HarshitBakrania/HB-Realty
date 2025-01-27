@@ -17,7 +17,7 @@ export default function NavBar() {
 
   return (
     <nav className="bg-white shadow-md w-full border-b border-gray-200">
-      <div className="container mx-auto px-4 py-3 flex justify-between items-center text-center">
+      <div className="container mx-auto px-7 py-3 flex justify-between items-center text-center">
         {/* Logo */}
         <div>
           <a href="/" onClick={() => navigate("/")}>
