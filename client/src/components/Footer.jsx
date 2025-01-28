@@ -27,7 +27,7 @@ export default function Footer() {
           </div>
           <div className="flex gap-3 items-center">
             <MapPin />
-            <div>123 Main St, San Francisco, CA 94105</div>
+            <div className="lg:max-w-xs">123 Main St, San Francisco, CA 94105</div>
           </div>
         </div>
         <div className="md:text-xl lg:text-2xl space-y-1 md:space-y-3 lg:space-y-4">
@@ -64,7 +64,7 @@ export default function Footer() {
               HB Realty
             </div>
             <div className="flex py-1 space-x-1 md:space-x-2 lg:space-x-4">
-              <img src={InstagramLogo} className="size-9 lg:size-12" />
+              <img src={InstagramLogo} className="size-9 lg:size-11" />
               <img src={FacebookLogo} className="size-8 lg:size-10" />
               <img src={YoutubeLogo} className="size-8 lg:size-10" />
               <img src={TwitterLogo} className="size-8 lg:size-10" />

@@ -37,18 +37,18 @@ export const SignInPage = () => {
     }
 
     return (
-        <div className="bg-background-color h-full">
+        <div className="bg-background-color">
             <NavBar />
-            <div className="text-white h-[100vh] py-40">
+            <div className="text-white py-20 md:py-40 px-10">
                 <div className="text-center space-y-2">
-                    <div className="text-3xl font-bold">
+                    <div className="text-3xl md:text-4xl font-bold">
                         Welcome Back!
                     </div>
-                    <div className="font-normal text-lg">
+                    <div className="font-normal md:text-lg">
                     Sign in to your account to access the latest real estate listings.
                     </div>
                 </div>
-                <div className="bg-secondary-color border-1 max-w-md mx-auto mt-6 p-6 space-y-3 rounded-lg">
+                <div className="bg-secondary-color border-1 max-w-md mx-auto mt-6 p-6 space-y-4 rounded-lg">
                     <InputBox onChange={e =>{
                         setUsername(e.target.value)
                     }} label="Username" placeholder="Enter your username" type="text"/>

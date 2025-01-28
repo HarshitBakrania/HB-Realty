@@ -44,11 +44,11 @@ export const UpdatePage = () => {
   return (
     <div className="bg-background-color">
       <NavBar />
-      <div className="h-[100vh] py-40">
+      <div className="py-20 md:py-40 px-10">
         <div className="text-3xl font-bold text-center text-white">
           Update Profile
         </div>
-        <div className="bg-secondary-color border-1 max-w-md mx-auto mt-6 p-6 space-y-3 rounded-lg text-white">
+        <div className="bg-secondary-color border-1 max-w-md mx-auto mt-6 p-6 space-y-4 rounded-lg text-white">
           <InputBox
             onChange={(e) => {
               setUsername(e.target.value);
