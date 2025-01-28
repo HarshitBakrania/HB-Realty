@@ -6,7 +6,7 @@ export const PhoneIcon = () => {
       viewBox="0 0 24 24"
       stroke-width="1.5"
       stroke="currentColor"
-      class="size-8"
+      class="size-7 md:size-8"
     >
       <path
         stroke-linecap="round"
@@ -26,7 +26,7 @@ export const HomeIcon = () => {
         viewBox="0 0 24 24"
         stroke-width="1.5"
         stroke="black"
-        class="size-8"
+        class="size-7 md:size-8"
       >
         <path
           stroke-linecap="round"
@@ -46,7 +46,7 @@ export const MailIcon = () => {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      className="size-8"
+      className="size-7 md:size-8"
     >
       <path
         strokeLinecap="round"
@@ -65,7 +65,7 @@ export const MapPin = () => {
       viewBox="0 0 24 24"
       stroke-width="1.5"
       stroke="currentColor"
-      class="size-8"
+      class="size-7 md:size-8"
     >
       <path
         stroke-linecap="round"
