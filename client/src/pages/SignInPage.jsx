@@ -29,6 +29,7 @@ export const SignInPage = () => {
             },{
                 withCredentials: true
             })
+            console.log(response.data);
             updateUser(response.data)
             navigate("/")
         }catch(error){

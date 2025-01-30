@@ -7,11 +7,14 @@ export const AuthContextProvider = ({ children }) => {
         const storedData = JSON.parse(localStorage.getItem("user"));
         const sevenDays = 1000 * 60 * 60 * 24 * 7;
 
-        if(storedData && new Date().getTime() - storedData.timeStamp < sevenDays){
-            return storedData.user;
-        }else{
-            localStorage.removeItem("user");
-            return null;
+        if(storedData){
+            const timeDifference = new Date().getTime() - storedData.timestamp;
+            if(timeDifference < sevenDays){
+                return storedData.user;
+            }else{
+                localStorage.removeItem("user");
+                return null;
+            }
         }
     });
     
@@ -31,6 +34,8 @@ export const AuthContextProvider = ({ children }) => {
             timestamp: new Date().getTime()
           };
           localStorage.setItem("user", JSON.stringify(userWithTimestamp));
+        }else{
+            localStorage.removeItem("user");
         }
       }, [currentUser]);
 
