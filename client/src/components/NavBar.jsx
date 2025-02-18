@@ -45,17 +45,29 @@ export default function NavBar() {
             <NavBarButtons label="Contact" />
             <NavBarButtons label="About" />
             {currentUser ? (
-              <div className="flex space-x-5">
-                <NavBarButtons
-                  label={"Profile"}
-                  onClick={() => navigate("/user")}
-                />
+              <div className="flex space-x-8 items-center">
                 <div onClick={() => navigate("/user/messages")}>
                   <MessageIcon notificationCount={notification} />
                 </div>
+                {currentUser.avatar ? (
+                  <img
+                    src={currentUser.avatar}
+                    alt="avatar"
+                    className="w-9 h-9 rounded-full"
+                    onClick={() => navigate("/user")}
+                  />
+                ) : (
+                  <div
+                    className="w-8 h-8 bg-gray-500 rounded-full"
+                    onClick={() => navigate("/user")}
+                  ></div>
+                )}
               </div>
             ) : (
-              <NavBarButtons label="Login" onClick={() => navigate("/signin")} />
+              <NavBarButtons
+                label="Login"
+                onClick={() => navigate("/signin")}
+              />
             )}
           </div>
         </div>
