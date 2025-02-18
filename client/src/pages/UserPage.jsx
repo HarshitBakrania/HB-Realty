@@ -60,7 +60,7 @@ export const UserPage = () => {
         </div>
 
         <div className="lg:col-span-3">
-          <div className="py-8 px-6 lg:py-16 lg:px-10 flex justify-between">
+          <div className="py-8 px-6 md:py-10 md:px-8 lg:py-16 lg:px-10 flex justify-between">
             <div className="text-2xl lg:text-4xl font-semibold">Your Listings</div>
             <Button
               label="Create New Listing"
