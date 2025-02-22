@@ -19,13 +19,13 @@ export const MessagePage = () => {
   const [text, setText] = useState("");
   const { chat, loading, updateLastMessage } = useChat();
   const {notification, decrease} = useNotificationStore();
+  const [showSidebar, setShowSidebar] = useState(true);
 
   const messageEndRef = useRef();
 
   useEffect(() => {
     messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
-
 
   useEffect(() => {
     const readMessage = async () => {
@@ -65,6 +65,7 @@ export const MessagePage = () => {
       );
       decrease();
       setMessages({ ...response.data, receiver });
+      setShowSidebar(false); // Hide sidebar on mobile when chat is opened
     } catch (err) {
       console.log(err);
     }
@@ -109,9 +110,10 @@ export const MessagePage = () => {
     <div className="flex flex-col h-screen bg-background-color">
       <NavBar />
       <div className="flex-1 flex overflow-hidden text-white">
-        <div className="w-1/4 flex flex-col border-r border-slate-600">
+        {/* Sidebar */}
+        <div className={`w-full md:w-1/4 flex flex-col border-r border-slate-600 ${!showSidebar && messages ? 'hidden md:flex' : 'flex'}`}>
           <div className="p-4 bg-black">
-            <button className="flex items-center bg-secondary-color p-3 rounded-lg space-x-2">
+            <button className="flex items-center bg-secondary-color p-3 rounded-lg space-x-2 w-full">
               <AddIcon />
               <span>New Conversation</span>
             </button>
@@ -137,10 +139,22 @@ export const MessagePage = () => {
           </div>
         </div>
 
+        {/* Chat Area */}
         {messages && (
-          <div className="flex-1 flex flex-col">
+          <div className={`flex-1 flex flex-col ${showSidebar ? 'hidden md:flex' : 'flex'}`}>
             <div className="text-lg p-4 border-b border-slate-600 flex items-center gap-2">
-              {messages.receiver.avatar ? <img src={messages.receiver.avatar} className="rounded-full size-12" /> : <ProfileIcon size={50} />}
+              <button 
+                className="md:hidden mr-2" 
+                onClick={() => setShowSidebar(true)}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                </svg>
+              </button>
+              {messages.receiver.avatar ? 
+                <img src={messages.receiver.avatar} className="rounded-full size-12" alt="avatar" /> : 
+                <ProfileIcon size={50} />
+              }
               <div className="flex flex-col">
                 <div className="font-semibold text-xl pl-2">{messages.receiver.username}</div>
               </div>
@@ -160,6 +174,7 @@ export const MessagePage = () => {
                         <img
                           src={messages.receiver.avatar}
                           className="rounded-full size-12"
+                          alt="avatar"
                         />
                       ) : null
                     }
