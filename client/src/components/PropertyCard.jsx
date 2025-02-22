@@ -7,7 +7,7 @@ export default function PropertyCard({ item }) {
 
   return (
     <div 
-      className="flex flex-col sm:grid sm:grid-cols-5 bg-secondary-color rounded-2xl border border-neutral-800 overflow-hidden"
+      className="flex flex-col sm:grid sm:grid-cols-5 bg-secondary-color rounded-2xl border border-neutral-800 overflow-hidden hover:cursor-pointer"
       onClick={() => navigate(`/posts/${item.id}`)}
     >
       <div className="sm:col-span-3 w-full">

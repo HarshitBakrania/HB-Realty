@@ -61,66 +61,66 @@ export const NewPostPage = () => {
     return (
        <div className="bg-background-color">
            <NavBar />
-           <div className="grid grid-cols-3">
-            <div className="col-span-2 border-r border-slate-600">
-                <div className="text-3xl font-semibold text-white px-36 pt-20">
-                    Create a new Listing
-                </div>
-                <form onSubmit={handleSubmit} className="grid grid-cols-3 gap-y-7 gap-x-12 text-white px-44 pt-10">
-                    <InputBox label="Title" type="text" name="title"/>  
-                    <InputBox label="Price" type="number" name="price"/>
-                    <InputBox label="Address" type="text" name="address"/>
-                    <InputBox label="City" type="text" name="city"/>
-                    <InputBox label="Bedrooms" type="number" name="bedroom"/>
-                    <InputBox label="Bathrooms" type="number" name="bathroom"/>
-                    <InputBox label="Total Size" type="number" name="size" />
-                    <InputBox label="Latitude" type="text" name="latitude" />
-                    <InputBox label="Longitude" type="text" name="longitude" />
-                    <InputBox label="School Distance (meters)" type="number" name="school" />
-                    <div className="flex justify-between py-4">
-                        <SelectFilter label="Type" name="type" options={["Buy", "Rent"]} />
-                        <SelectFilter label="Property" name="property" options={["Apartment", "House", "Land"]} />
+           <div className="block lg:grid lg:grid-cols-3">
+                <div className="lg:col-span-2 lg:border-r lg:border-slate-600">
+                    <div className="text-2xl lg:text-3xl font-semibold text-white px-6 lg:px-36 pt-8 lg:pt-20">
+                        Create a new Listing
                     </div>
-                    <div className="py-4 flex justify-between">
-                        <SelectFilter label="Furnished" name="furnished" options={["Yes", "No"]} />
-                        <SelectFilter label="Pets" name="pet" options={["Allowed", "Not Allowed"]} />
-                    </div>
-                    <InputBox label="Hospital Distance (meters)" type="number" name="hospital" />
-                    <InputBox label="Restaurant Distance (meters)" type="number" name="restaurant" /> 
-                    <div className="col-span-3">
-                        <div className="py-10 text-white space-y-2 ">
-                            <div className="text-2xl">
-                                Write a description
+                    <form onSubmit={handleSubmit} className="block lg:grid lg:grid-cols-3 lg:gap-y-7 lg:gap-x-12 text-white px-6 lg:px-44 pt-6 lg:pt-10 space-y-4 lg:space-y-0">
+                        <InputBox label="Title" type="text" name="title"/>  
+                        <InputBox label="Price" type="number" name="price"/>
+                        <InputBox label="Address" type="text" name="address"/>
+                        <InputBox label="City" type="text" name="city"/>
+                        <InputBox label="Bedrooms" type="number" name="bedroom"/>
+                        <InputBox label="Bathrooms" type="number" name="bathroom"/>
+                        <InputBox label="Total Size" type="number" name="size" />
+                        <InputBox label="Latitude" type="text" name="latitude" />
+                        <InputBox label="Longitude" type="text" name="longitude" />
+                        <InputBox label="School Distance (meters)" type="number" name="school" />
+                        <div className="space-y-4 lg:flex lg:justify-between lg:py-4 lg:space-y-0">
+                            <SelectFilter label="Type" name="type" options={["Buy", "Rent"]} />
+                            <SelectFilter label="Property" name="property" options={["Apartment", "House", "Land"]} />
+                        </div>
+                        <div className="space-y-4 lg:flex lg:justify-between lg:py-4 lg:space-y-0">
+                            <SelectFilter label="Furnished" name="furnished" options={["Yes", "No"]} />
+                            <SelectFilter label="Pets" name="pet" options={["Allowed", "Not Allowed"]} />
+                        </div>
+                        <InputBox label="Hospital Distance (meters)" type="number" name="hospital" />
+                        <InputBox label="Restaurant Distance (meters)" type="number" name="restaurant" /> 
+                        <div className="lg:col-span-3">
+                            <div className="py-6 lg:py-10 text-white space-y-2">
+                                <div className="text-xl lg:text-2xl">
+                                    Write a description
+                                </div>
+                                <ReactQuill theme="snow" name="description" onChange={setValue} value={value} />
                             </div>
-                            <ReactQuill theme="snow" name="description" onChange={setValue} value={value} />
+                            <div className="max-w-40 mx-auto pb-10 lg:pb-20">
+                                <Button label="Submit" />
+                            </div>
                         </div>
-                        <div className="max-w-40 mx-auto pb-20">
-                            <Button label="Submit" />
-                        </div>
-                    </div>
-                </form>               
-            </div>
-            <div className="col-span-1 flex flex-col py-14"> 
-                {images.map((image, index) => (
-                    <div key={index} className="relative hover:cursor-pointer flex space-x-3 px-24 py-4">
-                        <img src={image} className="w-80 h-45 rounded-lg " alt={`Uploaded ${index}`} />
-                        <div onClick={() => handleDeleteImage(image)}>
-                            <XMark />
-                        </div>
+                    </form>               
+                </div>
+                <div className="lg:col-span-1 flex flex-col py-8 lg:py-14"> 
+                    {images.map((image, index) => (
+                        <div key={index} className="relative hover:cursor-pointer flex space-x-3 px-6 lg:px-24 py-4">
+                            <img src={image} className="w-full lg:w-80 h-auto lg:h-45 rounded-lg" alt={`Uploaded ${index}`} />
+                            <div onClick={() => handleDeleteImage(image)} className="absolute top-2 right-2">
+                                <XMark />
+                            </div>
+                        </div>    
+                    ))}
+                    <div className="flex justify-center pt-8 lg:pt-36"> 
+                        <UploadWidget
+                            uwConfig={{
+                                cloudName: "dwos6fgt6",
+                                uploadPreset: "estate",
+                                multiple: true,
+                                folder: "posts",
+                            }}
+                            setState={setImages}
+                        />      
                     </div>    
-                ))}
-                <div className="flex justify-center pt-36"> 
-                    <UploadWidget
-                        uwConfig={{
-                        cloudName: "dwos6fgt6",
-                        uploadPreset: "estate",
-                        multiple: true,
-                        folder: "posts",
-                        }}
-                        setState={setImages}
-                    />      
-                </div>    
-            </div>
+                </div>
            </div>
            <Footer />
        </div>
@@ -128,8 +128,7 @@ export const NewPostPage = () => {
 }
 
 function XMark(){
-    return <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="red" className="size-6">
-    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
-  </svg>
-  
+    return <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 24 24" strokeWidth={1.5} stroke="red" className="w-4 h-4 lg:w-6 lg:h-6">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+    </svg>
 }
