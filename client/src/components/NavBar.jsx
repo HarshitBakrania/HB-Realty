@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { NavBarButtons, MessageIcon } from "./icons/icons";
 import logo from "/HB-Realty.jpg";
 import useNotificationStore from "../store/hooks/useNotificationStore";
+import defaultAvatar from "./icons/346569.png";
 
 export default function NavBar() {
   const navigate = useNavigate();
@@ -53,14 +54,15 @@ export default function NavBar() {
                   <img
                     src={currentUser.avatar}
                     alt="avatar"
-                    className="w-9 h-9 rounded-full"
+                    className="w-10 h-10 rounded-full"
                     onClick={() => navigate("/user")}
                   />
                 ) : (
-                  <div
-                    className="w-8 h-8 bg-gray-500 rounded-full"
+                  <img 
+                    src={defaultAvatar}
+                    className="w-10 h-10 rounded-full"
                     onClick={() => navigate("/user")}
-                  ></div>
+                  ></img>
                 )}
               </div>
             ) : (
@@ -101,7 +103,7 @@ export default function NavBar() {
       {/* Mobile Menu */}
       {mobileMenuOpen && (
         <div className="md:hidden">
-          <div className="flex flex-col items-end space-y-2 px-4 pb-4 bg-white shadow-lg">
+          <div className="flex flex-col items-end space-y-4 px-7 pb-4 bg-white shadow-lg">
             <NavBarButtons
               label="Buy"
               onClick={() => {
@@ -120,13 +122,27 @@ export default function NavBar() {
             <NavBarButtons label="About" />
             {currentUser ? (
               <>
-                <NavBarButtons
-                  label={"Profile"}
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    navigate("/user");
-                  }}
-                />
+                {currentUser.avatar ? (
+                  <img
+                    src={currentUser.avatar}
+                    alt="avatar"
+                    className="w-10 h-10 rounded-full cursor-pointer"
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      navigate("/user");
+                    }}
+                  />
+                ) : (
+                  <img 
+                    src={defaultAvatar}
+                    alt="default avatar"
+                    className="w-10 h-10 rounded-full cursor-pointer"
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      navigate("/user");
+                    }}
+                  />
+                )}
                 <div
                   onClick={() => {
                     setMobileMenuOpen(false);

@@ -65,7 +65,7 @@ export const MapPin = () => {
       viewBox="0 0 24 24"
       stroke-width="1.5"
       stroke="currentColor"
-      class="size-7 md:size-8"
+      class="size-6 md:size-8"
     >
       <path
         stroke-linecap="round"
@@ -142,8 +142,8 @@ export const CheckCircle = () => {
 export const BathroomIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="30px"
-    height="30px"
+    width="25px"
+    height="25px"
     viewBox="0 0 30 30"
     version="1.1"
   >
@@ -201,7 +201,7 @@ export function Bookmark() {
 
 export const NavBarButtons = ({ label, onClick }) => {
   return (
-    <div onClick={onClick} className="no-underline hover:underline text-lg">
+    <div onClick={onClick} className="no-underline hover:underline text-xl font-normal">
       {label}
     </div>
   );
