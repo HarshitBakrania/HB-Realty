@@ -1,3 +1,23 @@
+export const BedIcon = ({ className = "w-4 h-4" }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={1.8}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M3 7v10" />
+    <path d="M21 7v10" />
+    <path d="M3 11h18" />
+    <path d="M3 17h18" />
+    <path d="M6 11v-2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2" />
+    <rect x="7" y="8" width="4" height="3" rx="1" />
+  </svg>
+);
+
 export const PhoneIcon = () => {
   return (
     <svg
@@ -139,11 +159,11 @@ export const CheckCircle = () => {
   );
 };
 
-export const BathroomIcon = () => (
+export const BathroomIcon = ({ size = 25 }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="25px"
-    height="25px"
+    width={size}
+    height={size}
     viewBox="0 0 30 30"
     version="1.1"
   >
