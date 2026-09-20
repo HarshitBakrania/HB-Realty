@@ -49,7 +49,7 @@ export const SignInPage = () => {
                     Sign in to your account to access the latest real estate listings.
                     </div>
                 </div>
-                <div className="bg-secondary-color border-1 max-w-md mx-auto mt-6 p-6 space-y-4 rounded-lg">
+                <div className="bg-white/5 border border-white/10 max-w-md mx-auto mt-6 p-6 space-y-4 rounded-lg">
                     <InputBox onChange={e =>{
                         setUsername(e.target.value)
                     }} label="Username" placeholder="Enter your username" type="text"/>

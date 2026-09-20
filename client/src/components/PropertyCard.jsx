@@ -9,7 +9,7 @@ export default function PropertyCard({ item }) {
 
   return (
     <div
-      className="group flex flex-col sm:flex-row bg-secondary-color rounded-2xl border border-neutral-800 overflow-hidden hover:border-neutral-600 hover:shadow-lg hover:shadow-black/40 transition-all duration-300 cursor-pointer"
+      className="group flex flex-col sm:flex-row bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:border-white/25 hover:shadow-lg hover:shadow-black/40 transition-all duration-300 cursor-pointer"
       onClick={() => navigate(`/posts/${item.id}`)}
     >
       {/* Image */}

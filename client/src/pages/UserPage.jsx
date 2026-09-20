@@ -39,7 +39,7 @@ export const UserPage = () => {
     <div>
       <NavBar />
       <div className="text-white bg-background-color lg:grid lg:grid-cols-4 lg:px-14">
-        <div className="bg-secondary-color max-h-max p-10 space-y-5 lg:col-span-1 lg:m-10 lg:order-last">
+        <div className="bg-white/5 border border-white/10 max-h-max p-10 space-y-5 lg:col-span-1 lg:m-10 lg:order-last">
           <div className="flex justify-between">
             <div className="text-2xl lg:text-3xl font-bold">Account Information</div>
             <Button label="Update Profile" onClick={() => navigate("/user/update")} />

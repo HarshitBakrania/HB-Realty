@@ -113,7 +113,7 @@ export const MessagePage = () => {
         {/* Sidebar */}
         <div className={`w-full md:w-1/4 flex flex-col border-r border-slate-600 ${!showSidebar && messages ? 'hidden md:flex' : 'flex'}`}>
           <div className="p-4 bg-black">
-            <button className="flex items-center bg-secondary-color p-3 rounded-lg space-x-2 w-full">
+              <button className="flex items-center bg-white/5 border border-white/10 p-3 rounded-lg space-x-2 w-full">
               <AddIcon />
               <span>New Conversation</span>
             </button>

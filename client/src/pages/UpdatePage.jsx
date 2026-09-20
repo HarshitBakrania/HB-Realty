@@ -48,7 +48,7 @@ export const UpdatePage = () => {
         <div className="text-3xl font-bold text-center text-white">
           Update Profile
         </div>
-        <div className="bg-secondary-color border-1 max-w-md mx-auto mt-6 p-6 space-y-4 rounded-lg text-white">
+        <div className="bg-white/5 border border-white/10 max-w-md mx-auto mt-6 p-6 space-y-4 rounded-lg text-white">
           <InputBox
             onChange={(e) => {
               setUsername(e.target.value);

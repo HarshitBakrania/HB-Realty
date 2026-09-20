@@ -85,7 +85,7 @@ function SearchFilters() {
   };
 
   return (
-    <div className="bg-secondary-color p-5 rounded-lg mt-12">
+    <div className="bg-white/5 border border-white/10 p-5 rounded-lg mt-12">
       <div className="text-white text-2xl md:text-3xl lg:text-4xl font-medium mb-4 italic">
         Your perfect property awaits!
       </div>
