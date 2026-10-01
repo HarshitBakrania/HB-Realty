@@ -50,7 +50,10 @@ export const SignUpPage = () => {
                             Join HB Realty and start exploring properties today.
                         </div>
                     </div>
-                    <div className="bg-white/5 border border-white/10 rounded-2xl p-6 sm:p-8 space-y-5 shadow-xl shadow-black/30">
+                    <form 
+                        onSubmit={(e) => { e.preventDefault(); RegisterUser(); }}
+                        className="bg-white/5 border border-white/10 rounded-2xl p-6 sm:p-8 space-y-5 shadow-xl shadow-black/30"
+                    >
                         <InputBox
                             onChange={e => setUsername(e.target.value)}
                             type="text"
@@ -75,7 +78,7 @@ export const SignUpPage = () => {
                             </div>
                         )}
                         <Button
-                            onClick={RegisterUser}
+                            type="submit"
                             label={loading ? "Creating account…" : "Create Account"}
                             className="w-full py-3 text-base"
                         />
@@ -85,7 +88,7 @@ export const SignUpPage = () => {
                                 Sign In
                             </Link>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
             <Footer />

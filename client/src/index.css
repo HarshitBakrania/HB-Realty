@@ -2,6 +2,46 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── Base ── */
+body {
+  font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── ReactQuill dark theme ── */
 .quill > .ql-container > .ql-editor {
-    @apply h-52;
+  @apply h-52;
+  background: #0F0F10;
+  color: white;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+}
+
+.ql-toolbar.ql-snow {
+  background: #18181B !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.ql-container.ql-snow {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  border-radius: 0 0 0.5rem 0.5rem;
+}
+
+.ql-toolbar .ql-stroke {
+  stroke: rgba(255, 255, 255, 0.6) !important;
+}
+
+.ql-toolbar .ql-fill {
+  fill: rgba(255, 255, 255, 0.6) !important;
+}
+
+.ql-toolbar button:hover .ql-stroke,
+.ql-toolbar button.ql-active .ql-stroke {
+  stroke: white !important;
+}
+
+.ql-toolbar .ql-picker-label {
+  color: rgba(255, 255, 255, 0.6) !important;
 }

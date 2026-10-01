@@ -103,7 +103,7 @@ export const NewPostPage = () => {
                         </div>
 
                         <div className="pt-2">
-                            <Button label={submitting ? "Submitting…" : "Submit Listing"} className="w-full sm:max-w-xs" />
+                            <Button type="submit" label={submitting ? "Submitting…" : "Submit Listing"} className="w-full sm:max-w-xs" />
                         </div>
                     </form>
                 </div>

@@ -53,7 +53,11 @@ export const PropertyPage = () => {
   };
 
   //TODO: add loading skeleton
-  if (loading) return <div>Loading...</div>;
+  if (loading) return (
+    <div className="bg-background-color min-h-screen flex items-center justify-center text-white/50 text-lg tracking-wide">
+      Loading…
+    </div>
+  );
 
   const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -95,7 +99,7 @@ export const PropertyPage = () => {
                   __html: DOMPurify.sanitize(post.postDetail.description),
                 }}
               />
-              <div className="text-lg sm:text-xl md:text-2xl bg-navbar-color max-w-max px-4 py-2 rounded-lg text-black">
+              <div className="inline-flex items-center bg-white text-black font-bold text-xl sm:text-2xl px-5 py-2.5 rounded-xl shadow-lg">
                 ${post.price.toLocaleString()}
               </div>
             </div>

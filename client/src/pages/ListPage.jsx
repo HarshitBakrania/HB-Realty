@@ -9,6 +9,82 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 
+// ─────────────────────────────────────────────────────────────────────────────
+// FilterPanel is defined OUTSIDE ListPage so React doesn't treat it as a new
+// component type on every re-render (which would unmount inputs and lose focus).
+// ─────────────────────────────────────────────────────────────────────────────
+function FilterPanel({
+  city, setCity,
+  type, setType,
+  property, setProperty,
+  minPrice, setMinPrice,
+  maxPrice, setMaxPrice,
+  bedroom, setBedroom,
+  onSearch,
+}) {
+  return (
+    <form 
+      className="space-y-5 text-white"
+      onSubmit={(e) => {
+        e.preventDefault();
+        onSearch();
+      }}
+    >
+      <div className="text-base font-semibold border-b border-slate-700 pb-3 text-white/70 uppercase tracking-wider">
+        Filters
+      </div>
+      <InputBox
+        value={city}
+        onChange={(e) => setCity(e.target.value)}
+        label="Location"
+        placeholder="City name…"
+        type="text"
+      />
+      <div className="grid grid-cols-2 gap-4">
+        <SelectFilter
+          onChange={(e) => setType(e.target.value)}
+          value={type}
+          label="Type"
+          name="type"
+          options={["Any", "Buy", "Rent"]}
+        />
+        <SelectFilter
+          onChange={(e) => setProperty(e.target.value)}
+          value={property}
+          label="Property"
+          name="property"
+          options={["Any", "Apartment", "House", "Land"]}
+        />
+      </div>
+      <div className="grid grid-cols-2 gap-4">
+        <InputBox
+          value={minPrice}
+          onChange={(e) => setMinPrice(e.target.value)}
+          label="Min Price"
+          placeholder="0"
+          type="number"
+        />
+        <InputBox
+          value={maxPrice}
+          onChange={(e) => setMaxPrice(e.target.value)}
+          label="Max Price"
+          placeholder="1,000,000"
+          type="number"
+        />
+      </div>
+      <InputBox
+        value={bedroom || ""}
+        onChange={(e) => setBedroom(e.target.value)}
+        label="Bedrooms"
+        name="bedroom"
+        placeholder="Any"
+        type="number"
+      />
+      <Button label="Search" type="submit" className="w-full" />
+    </form>
+  );
+}
+
 export const ListPage = () => {
   const { posts, loading } = usePosts();
   const [city, setCity] = useState("");
@@ -48,59 +124,15 @@ export const ListPage = () => {
     setFiltersOpen(false);
   };
 
-  const FilterPanel = () => (
-    <div className="space-y-5 text-white">
-      <div className="text-xl font-semibold border-b border-slate-600 pb-3">
-        Filters
-      </div>
-      <InputBox
-        onChange={(e) => setCity(e.target.value)}
-        label="Location"
-        placeholder="City Location"
-        type="text"
-      />
-      <div className="grid grid-cols-2 gap-4">
-        <SelectFilter
-          onChange={(e) => setType(e.target.value)}
-          value={type}
-          label="Type"
-          name="type"
-          options={["Any", "Buy", "Rent"]}
-          className="p-2 w-full"
-        />
-        <SelectFilter
-          onChange={(e) => setProperty(e.target.value)}
-          value={property}
-          label="Property"
-          name="property"
-          options={["Any", "Apartment", "House", "Land"]}
-          className="p-2 w-full"
-        />
-      </div>
-      <div className="grid grid-cols-2 gap-4">
-        <InputBox
-          onChange={(e) => setMinPrice(e.target.value)}
-          label="Min Price"
-          placeholder="0"
-          type="number"
-        />
-        <InputBox
-          onChange={(e) => setMaxPrice(e.target.value)}
-          label="Max Price"
-          placeholder="1,000,000"
-          type="number"
-        />
-      </div>
-      <InputBox
-        onChange={(e) => setBedroom(e.target.value)}
-        label="Bedrooms"
-        name="bedroom"
-        placeholder="Number of Bedrooms"
-        type="number"
-      />
-      <Button label="Search" onClick={handleFilter} className="w-full" />
-    </div>
-  );
+  const filterProps = {
+    city, setCity,
+    type, setType,
+    property, setProperty,
+    minPrice, setMinPrice,
+    maxPrice, setMaxPrice,
+    bedroom, setBedroom,
+    onSearch: handleFilter,
+  };
 
   return (
     <div className="bg-background-color min-h-screen flex flex-col">
@@ -113,7 +145,7 @@ export const ListPage = () => {
             onClick={() => setFiltersOpen(!filtersOpen)}
             className="flex items-center gap-2 bg-white/5 border border-white/10 text-white px-4 py-2 rounded-lg w-full justify-between"
           >
-            <span className="font-semibold">Filters</span>
+            <span className="font-semibold text-sm">Filters</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className={`w-5 h-5 transition-transform duration-200 ${filtersOpen ? "rotate-180" : ""}`}
@@ -133,21 +165,27 @@ export const ListPage = () => {
           {/* Mobile: Collapsible Filter Panel */}
           {filtersOpen && (
             <div className="bg-white/5 border border-white/10 rounded-lg p-4 mt-2">
-              <FilterPanel />
+              <FilterPanel {...filterProps} />
             </div>
           )}
         </div>
 
         {/* Desktop Sidebar Filters */}
         <div className="hidden lg:block px-6 py-6 col-span-1 border-r border-slate-600">
-          <FilterPanel />
+          <FilterPanel {...filterProps} />
         </div>
 
         {/* Property Cards */}
         <div className="lg:col-span-3 text-white space-y-5 p-4 sm:p-6 lg:p-8 lg:border-r lg:border-slate-600">
           {posts.length === 0 ? (
-            <div className="text-center text-slate-400 pt-20 text-lg">
-              No properties found.
+            <div className="flex flex-col items-center justify-center py-24 space-y-4 text-center">
+              <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-3xl">
+                🏠
+              </div>
+              <div className="text-white text-lg font-semibold">No properties found</div>
+              <div className="text-slate-500 text-sm max-w-xs leading-relaxed">
+                Try adjusting your filters or searching a different city.
+              </div>
             </div>
           ) : (
             posts.map((item) => <PropertyCard key={item.id} item={item} />)

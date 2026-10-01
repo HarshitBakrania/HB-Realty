@@ -17,7 +17,7 @@ export default function NavBar() {
   }, [notification]);
 
   return (
-    <nav className="bg-white shadow-md w-full border-b border-gray-200">
+    <nav className="bg-white/95 backdrop-blur-sm shadow-sm w-full border-b border-gray-100 sticky top-0 z-50">
       <div className="container mx-auto px-5 sm:px-7 py-3 flex justify-between items-center">
         {/* Logo */}
         <div>

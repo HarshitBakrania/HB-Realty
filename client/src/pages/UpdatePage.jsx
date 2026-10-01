@@ -48,7 +48,10 @@ export const UpdatePage = () => {
         <div className="text-3xl font-bold text-center text-white">
           Update Profile
         </div>
-        <div className="bg-white/5 border border-white/10 max-w-md mx-auto mt-6 p-6 space-y-4 rounded-lg text-white">
+        <form 
+          onSubmit={(e) => { e.preventDefault(); UpdateUser(); }}
+          className="bg-white/5 border border-white/10 max-w-md mx-auto mt-6 p-6 space-y-4 rounded-lg text-white"
+        >
           <InputBox
             onChange={(e) => {
               setUsername(e.target.value);
@@ -73,8 +76,14 @@ export const UpdatePage = () => {
             placeholder="*********"
             type="password"
           />
-          <div>
-            <img src={avatar[0]} />
+          <div className="space-y-3">
+            {avatar[0] && (
+              <img
+                src={avatar[0]}
+                className="w-20 h-20 rounded-full object-cover ring-2 ring-white/20"
+                alt="New avatar preview"
+              />
+            )}
             <UploadWidget
               uwConfig={{
                 cloudName: "dwos6fgt6",
@@ -86,11 +95,11 @@ export const UpdatePage = () => {
             />
           </div>
           <Button
-            onClick={UpdateUser}
+            type="submit"
             label="Update Profile"
             className="mt-6 w-full"
           />
-        </div>
+        </form>
       </div>
 
       <Footer />

@@ -35,22 +35,22 @@ export const Homepage = () => {
             <div>
               <SearchFilters />
             </div>
-            <div className="grid grid-cols-2 gap-8 pt-6 border-t border-white/10">
+            <div className="grid grid-cols-2 gap-4 pt-6 border-t border-white/10">
               <div>
-                <div className="text-white text-3xl md:text-4xl font-bold">500+</div>
-                <div className="text-gray-400 text-sm md:text-base mt-1">Properties Sold</div>
+                <div className="text-white text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">500+</div>
+                <div className="text-white/40 text-xs sm:text-sm mt-1 uppercase tracking-wider">Properties Sold</div>
               </div>
               <div>
-                <div className="text-white text-3xl md:text-4xl font-bold">$1B+</div>
-                <div className="text-gray-400 text-sm md:text-base mt-1">Total Sales</div>
+                <div className="text-white text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">$1B+</div>
+                <div className="text-white/40 text-xs sm:text-sm mt-1 uppercase tracking-wider">Total Sales</div>
               </div>
               <div>
-                <div className="text-white text-3xl md:text-4xl font-bold">15+</div>
-                <div className="text-gray-400 text-sm md:text-base mt-1">Years in Business</div>
+                <div className="text-white text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">15+</div>
+                <div className="text-white/40 text-xs sm:text-sm mt-1 uppercase tracking-wider">Years in Business</div>
               </div>
               <div>
-                <div className="text-white text-3xl md:text-4xl font-bold">98%</div>
-                <div className="text-gray-400 text-sm md:text-base mt-1">Client Satisfaction</div>
+                <div className="text-white text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">98%</div>
+                <div className="text-white/40 text-xs sm:text-sm mt-1 uppercase tracking-wider">Client Satisfaction</div>
               </div>
             </div>
           </div>
@@ -96,7 +96,10 @@ function SearchFilters() {
   };
 
   return (
-    <div className="bg-white/5 border border-white/10 p-6 sm:p-8 rounded-2xl">
+    <form 
+      onSubmit={(e) => { e.preventDefault(); GetProperties(); }}
+      className="bg-white/5 border border-white/10 p-6 sm:p-8 rounded-2xl"
+    >
       <div className="text-white text-xl font-semibold mb-6">
         Search Properties
       </div>
@@ -140,10 +143,10 @@ function SearchFilters() {
         />
       </div>
       <Button
+        type="submit"
         label="Search"
-        onClick={GetProperties}
         className="mt-8 w-full py-3 text-lg font-medium"
       />
-    </div>
+    </form>
   );
 }

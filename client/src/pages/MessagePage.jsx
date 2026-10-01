@@ -99,7 +99,11 @@ export const MessagePage = () => {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="bg-background-color min-h-screen flex items-center justify-center text-white/50 text-lg">
+        Loading…
+      </div>
+    );
   }
 
   if (!currentUser) {
@@ -112,8 +116,8 @@ export const MessagePage = () => {
       <div className="flex-1 flex overflow-hidden text-white">
         {/* Sidebar */}
         <div className={`w-full md:w-80 lg:w-72 xl:w-80 flex flex-col border-r border-slate-600 ${!showSidebar && messages ? 'hidden md:flex' : 'flex'}`}>
-          <div className="p-4 bg-black">
-              <button className="flex items-center bg-white/5 border border-white/10 p-3 rounded-lg space-x-2 w-full">
+          <div className="p-3 border-b border-white/5">
+            <button className="flex items-center gap-2 bg-white/5 border border-white/10 hover:bg-white/10 px-4 py-2.5 rounded-lg w-full transition-colors text-sm font-medium">
               <AddIcon />
               <span>New Conversation</span>
             </button>
