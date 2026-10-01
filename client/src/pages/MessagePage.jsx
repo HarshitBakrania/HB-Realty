@@ -111,7 +111,7 @@ export const MessagePage = () => {
       <NavBar />
       <div className="flex-1 flex overflow-hidden text-white">
         {/* Sidebar */}
-        <div className={`w-full md:w-1/4 flex flex-col border-r border-slate-600 ${!showSidebar && messages ? 'hidden md:flex' : 'flex'}`}>
+        <div className={`w-full md:w-80 lg:w-72 xl:w-80 flex flex-col border-r border-slate-600 ${!showSidebar && messages ? 'hidden md:flex' : 'flex'}`}>
           <div className="p-4 bg-black">
               <button className="flex items-center bg-white/5 border border-white/10 p-3 rounded-lg space-x-2 w-full">
               <AddIcon />

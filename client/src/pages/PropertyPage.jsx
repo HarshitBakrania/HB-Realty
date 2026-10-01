@@ -251,7 +251,7 @@ export const PropertyPage = () => {
             </div>
 
             {/* Owner Details */}
-            <div className="mt-16 sm:mt-24 lg:mt-32">
+            <div className="mt-8 sm:mt-12 lg:mt-16">
               <div className="font-semibold text-xl sm:text-2xl">
                 Owner Details:
               </div>

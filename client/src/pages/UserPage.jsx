@@ -21,12 +21,10 @@ export const UserPage = () => {
 
   async function LogoutUser() {
     try {
-      const response = await axios.post(
+      await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/api/auth/logout`,
         {},
-        {
-          withCredentials: true,
-        }
+        { withCredentials: true }
       );
       logout();
       navigate("/");
@@ -36,48 +34,80 @@ export const UserPage = () => {
   }
 
   return (
-    <div>
+    <div className="min-h-screen flex flex-col bg-background-color">
       <NavBar />
-      <div className="text-white bg-background-color lg:grid lg:grid-cols-4 lg:px-14">
-        <div className="bg-white/5 border border-white/10 max-h-max p-10 space-y-5 lg:col-span-1 lg:m-10 lg:order-last">
-          <div className="flex justify-between">
-            <div className="text-2xl lg:text-3xl font-bold">Account Information</div>
-            <Button label="Update Profile" onClick={() => navigate("/user/update")} />
+      <div className="flex-1 text-white lg:grid lg:grid-cols-4 lg:px-10 xl:px-14">
+
+        {/* ── Account Info Sidebar ── */}
+        <div className="bg-white/5 border border-white/10 rounded-2xl p-5 sm:p-8 space-y-5 m-4 sm:m-6 lg:col-span-1 lg:m-8 lg:order-last lg:h-fit lg:sticky lg:top-20">
+          {/* Heading + Update button */}
+          <div className="flex flex-wrap gap-3 items-center justify-between">
+            <div className="text-xl sm:text-2xl font-bold">Account Info</div>
+            <Button
+              label="Edit Profile"
+              onClick={() => navigate("/user/update")}
+              className="text-sm"
+            />
           </div>
-          <div className="text-lg lg:text-xl font-semibold">
-            <div className="flex">
-              <div className="py-6">Avatar:</div>
-              {currentUser.avatar ? (
-                <img src={currentUser.avatar} className="rounded-full size-20 ml-4" />
-              ) : null}
+
+          {/* Avatar */}
+          <div className="flex items-center gap-4 py-2">
+            {currentUser.avatar ? (
+              <img
+                src={currentUser.avatar}
+                className="rounded-full w-16 h-16 sm:w-20 sm:h-20 object-cover ring-2 ring-white/20"
+                alt="avatar"
+              />
+            ) : (
+              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/10 flex items-center justify-center text-2xl font-bold">
+                {currentUser.username?.[0]?.toUpperCase()}
+              </div>
+            )}
+            <div>
+              <div className="font-semibold text-lg">{currentUser.username}</div>
+              <div className="text-sm text-gray-400">{currentUser.email}</div>
             </div>
-            <div className="pt-4">Username: {currentUser.username}</div>
-            <div className="py-6">Email Address: {currentUser.email}</div>
-            <div className="pt-2 font-normal">
-              <Button label="Logout" onClick={LogoutUser} />
-            </div>
+          </div>
+
+          <div className="border-t border-white/10 pt-4">
+            <Button label="Logout" onClick={LogoutUser} className="w-full" />
           </div>
         </div>
 
-        <div className="lg:col-span-3">
-          <div className="py-8 px-6 md:py-10 md:px-8 lg:py-16 lg:px-10 flex justify-between">
-            <div className="text-2xl lg:text-4xl font-semibold">Your Listings</div>
+        {/* ── Listings Column ── */}
+        <div className="lg:col-span-3 px-4 sm:px-6 lg:px-8">
+          {/* Your Listings header */}
+          <div className="flex flex-wrap gap-3 items-center justify-between py-6 sm:py-8 lg:py-10">
+            <div className="text-2xl sm:text-3xl lg:text-4xl font-semibold">Your Listings</div>
             <Button
-              label="Create New Listing"
-              className="lg:text-lg"
-              onClick={() => {
-                navigate("/posts/create");
-              }}
+              label="+ New Listing"
+              className="text-sm sm:text-base"
+              onClick={() => navigate("/posts/create")}
             />
           </div>
-          <div className="px-6 lg:px-8 mt-6 lg:mt-8 mb-20 space-y-12">
-            {userPosts ? userPosts.map((item) => <PropertyCard key={item.id} item={item} />) : null}
-          </div>
-          <div className="text-2xl lg:text-4xl font-semibold text-center pb-6 pt-12 border-t border-slate-800 mx-4">
-            Saved Posts
-          </div>
-          <div className="px-6 lg:px-8 mt-6 lg:mt-8 pb-36 space-y-12">
-            {savedPosts ? savedPosts.map((item) => <PropertyCard key={item.id} item={item} />) : null}
+
+          {loading ? (
+            <div className="text-center text-slate-400 py-10 text-lg">Loading…</div>
+          ) : userPosts?.length ? (
+            <div className="space-y-5 mb-16">
+              {userPosts.map((item) => <PropertyCard key={item.id} item={item} />)}
+            </div>
+          ) : (
+            <div className="text-center text-slate-500 py-10">No listings yet.</div>
+          )}
+
+          {/* Saved Posts */}
+          <div className="border-t border-slate-800 pt-6 sm:pt-8 pb-4">
+            <div className="text-2xl sm:text-3xl lg:text-4xl font-semibold mb-6 sm:mb-8">Saved Posts</div>
+            {loading ? (
+              <div className="text-center text-slate-400 py-10 text-lg">Loading…</div>
+            ) : savedPosts?.length ? (
+              <div className="space-y-5 pb-16">
+                {savedPosts.map((item) => <PropertyCard key={item.id} item={item} />)}
+              </div>
+            ) : (
+              <div className="text-center text-slate-500 py-10 pb-16">No saved posts yet.</div>
+            )}
           </div>
         </div>
       </div>

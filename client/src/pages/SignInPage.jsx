@@ -11,6 +11,7 @@ export const SignInPage = () => {
     const[username, setUsername] = useState("");
     const[password, setPassword] = useState("");
     const[error, setError] = useState("");
+    const[loading, setLoading] = useState(false);
     const {updateUser} = useContext(AuthContext);
 
     const navigate = useNavigate();
@@ -22,6 +23,7 @@ export const SignInPage = () => {
     },[error])
 
     async function LoginUser(){
+        setLoading(true);
         try{
             const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/auth/login`,{
                 username,
@@ -29,42 +31,57 @@ export const SignInPage = () => {
             },{
                 withCredentials: true
             })
-            console.log(response.data);
             updateUser(response.data)
             navigate("/")
         }catch(error){
-            setError(error.response.data.message);
+            setError(error.response?.data?.message || "Something went wrong.");
+        } finally {
+            setLoading(false);
         }
     }
 
     return (
-        <div className="bg-background-color">
+        <div className="bg-background-color min-h-screen flex flex-col">
             <NavBar />
-            <div className="text-white py-20 md:py-40 px-10">
-                <div className="text-center space-y-2">
-                    <div className="text-3xl md:text-4xl font-bold">
-                        Welcome Back!
+            <div className="flex-1 flex items-center justify-center text-white px-4 sm:px-10 py-12">
+                <div className="w-full max-w-md">
+                    <div className="text-center space-y-2 mb-8">
+                        <div className="text-3xl sm:text-4xl font-bold">
+                            Welcome Back!
+                        </div>
+                        <div className="font-normal text-sm sm:text-base text-gray-400">
+                            Sign in to your account to access the latest real estate listings.
+                        </div>
                     </div>
-                    <div className="font-normal md:text-lg">
-                    Sign in to your account to access the latest real estate listings.
-                    </div>
-                </div>
-                <div className="bg-white/5 border border-white/10 max-w-md mx-auto mt-6 p-6 space-y-4 rounded-lg">
-                    <InputBox onChange={e =>{
-                        setUsername(e.target.value)
-                    }} label="Username" placeholder="Enter your username" type="text"/>
-                    <InputBox onChange={e =>{
-                        setPassword(e.target.value)
-                    }} label="Password" placeholder="Enter your password" type="password"/>
-                    <div className="w-full">
-                        <Button onClick={LoginUser} label="Sign In" className="w-full mt-6"/>
-                    </div>
-                    <div className="text-red-600 font-medium text-base">
-                        {error}
-                    </div>
-                    <div>
-                        Don't have an account? 
-                        <Link to="/signup" className="underline pl-2 font-semibold">Sign Up</Link>
+                    <div className="bg-white/5 border border-white/10 rounded-2xl p-6 sm:p-8 space-y-5 shadow-xl shadow-black/30">
+                        <InputBox
+                            onChange={e => setUsername(e.target.value)}
+                            label="Username"
+                            placeholder="Enter your username"
+                            type="text"
+                        />
+                        <InputBox
+                            onChange={e => setPassword(e.target.value)}
+                            label="Password"
+                            placeholder="Enter your password"
+                            type="password"
+                        />
+                        {error && (
+                            <div className="text-red-500 text-sm font-medium bg-red-500/10 border border-red-500/20 rounded-lg px-3 py-2">
+                                {error}
+                            </div>
+                        )}
+                        <Button
+                            onClick={LoginUser}
+                            label={loading ? "Signing in…" : "Sign In"}
+                            className="w-full py-3 text-base"
+                        />
+                        <div className="text-sm text-gray-400 text-center">
+                            Don't have an account?{" "}
+                            <Link to="/signup" className="text-white underline font-semibold hover:text-navbar-color transition-colors">
+                                Sign Up
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </div>
