@@ -18,7 +18,7 @@ export const MessagePage = () => {
   const [messages, setMessages] = useState("");
   const [text, setText] = useState("");
   const { chat, loading, updateLastMessage } = useChat();
-  const {notification, decrease} = useNotificationStore();
+  const { decrease } = useNotificationStore();
   const [showSidebar, setShowSidebar] = useState(true);
 
   const messageEndRef = useRef();

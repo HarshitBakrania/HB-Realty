@@ -12,7 +12,7 @@ export const UserPage = () => {
   const { posts, loading } = useUserPosts();
   const userPosts = posts.userPosts;
   const savedPosts = posts.savedPosts;
-  const { updateUser, currentUser, logout } = useContext(AuthContext);
+  const { currentUser, logout } = useContext(AuthContext);
   const navigate = useNavigate();
 
   if (!currentUser) {

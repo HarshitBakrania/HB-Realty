@@ -45,7 +45,7 @@
 Follow these steps to run the project locally:
 
 ### Prerequisites
-- Node.js (v16 or later)
+- Node.js (v20 or later, v24 recommended)
 - MongoDB (local or hosted)
 - npm or yarn package manager
 

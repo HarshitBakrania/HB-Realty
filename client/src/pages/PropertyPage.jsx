@@ -10,7 +10,6 @@ import { AuthContext } from "../context/AuthContext";
 import axios from "axios";
 import TextIcon, {
   MapPin,
-  CheckCircle,
   Bookmark,
   BathroomIcon,
   RulerIcon,
@@ -33,7 +32,7 @@ export const PropertyPage = () => {
     } else if (!currentUser) {
       navigate("/signin");
     }
-  }, [loading, post]);
+  }, [loading, post, currentUser, navigate]);
 
   const savePost = async () => {
     setSaved((prev) => !prev);
@@ -65,7 +64,7 @@ export const PropertyPage = () => {
 
   async function sendMessage() {
     try {
-      const response = await axios.post(
+      await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/api/chats`,
         { userIdToken: currentUser.id, receiverId: post.userId },
         { withCredentials: true },

@@ -4,7 +4,7 @@ import Button from "./Button";
 // Create a context to manage the script loading state
 const CloudinaryScriptContext = createContext();
 
-function UploadImage({ uwConfig, setPublicId, setState }) {
+function UploadImage({ uwConfig, setState }) {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {

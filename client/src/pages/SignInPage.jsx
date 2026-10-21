@@ -80,7 +80,7 @@ export const SignInPage = () => {
                             className="w-full py-3 text-base"
                         />
                         <div className="text-sm text-gray-400 text-center">
-                            Don't have an account?{" "}
+                            Don&apos;t have an account?{" "}
                             <Link to="/signup" className="text-white underline font-semibold hover:text-navbar-color transition-colors">
                                 Sign Up
                             </Link>

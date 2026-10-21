@@ -1,6 +1,5 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import NavBar from "../components/NavBar";
-import { AuthContext } from "../context/AuthContext";
 import { InputBox } from "../components/InputBox";
 import { SelectFilter } from "../components/SelectFilter";
 import Button from "../components/Button";
@@ -8,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 
 export const Homepage = () => {
-  const { currentUser } = useContext(AuthContext);
 
   return (
     <div className="bg-background-color min-h-screen flex flex-col">
