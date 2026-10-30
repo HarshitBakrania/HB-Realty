@@ -3,22 +3,20 @@ import Button from "../components/Button";
 import { InputBox } from "../components/InputBox";
 import NavBar from "../components/NavBar";
 import { AuthContext } from "../context/AuthContext";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import UploadWidget from "../components/UploadImage";
 import axios from "axios";
 import Footer from "../components/Footer";
 
 export const UpdatePage = () => {
   const { currentUser, updateUser } = useContext(AuthContext);
-  const [username, setUsername] = useState(currentUser.username);
-  const [email, setEmail] = useState(currentUser.email);
+  // RequireAuth in App.jsx guarantees currentUser is non-null here,
+  // but optional chaining keeps useState safe as a fallback.
+  const [username, setUsername] = useState(currentUser?.username ?? "");
+  const [email, setEmail] = useState(currentUser?.email ?? "");
   const [password, setPassword] = useState("");
   const [avatar, setAvatar] = useState([]);
   const navigate = useNavigate();
-
-  if (!currentUser) {
-    return <Navigate to="/signin" />;
-  }
 
   async function UpdateUser() {
     try {

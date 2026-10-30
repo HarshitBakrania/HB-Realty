@@ -29,9 +29,30 @@ function App() {
           <Route path="/posts/:id" element={<PropertyPage />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/signin" element={<SignInPage />} />
-          <Route path="/user" element={<UserPage />} />
-          <Route path="/user/update" element={<UpdatePage />} />
-          <Route path="/user/messages" element={<MessagePage />} />
+          <Route
+            path="/user"
+            element={
+              <RequireAuth>
+                <UserPage />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/user/update"
+            element={
+              <RequireAuth>
+                <UpdatePage />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/user/messages"
+            element={
+              <RequireAuth>
+                <MessagePage />
+              </RequireAuth>
+            }
+          />
           <Route
             path="/posts/create"
             element={
