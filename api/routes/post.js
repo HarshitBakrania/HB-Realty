@@ -118,11 +118,20 @@ router.delete("/:id", authMiddleware, async (req, res) => {
       where: { id },
     });
 
+    if (!post) {
+      return res.status(404).json({ message: "Post not found" });
+    }
+
     if (post.userId !== userIdToken) {
       return res.status(403).json({
         message: "Unauthorized",
       });
     }
+
+    // MongoDB does not support onDelete: Cascade via Prisma, so we
+    // manually delete all child records before deleting the post.
+    await prisma.postDetail.deleteMany({ where: { postId: id } });
+    await prisma.savedPost.deleteMany({ where: { postId: id } });
 
     await prisma.post.delete({
       where: { id },
